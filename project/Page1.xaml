@@ -1,0 +1,31 @@
+﻿<Page
+    x:Class="project.Page1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:project"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer>
+            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+                <TextBlock Name="TB" Text="处理界面" FontSize="48" HorizontalAlignment="Center"></TextBlock>
+                <Image Source="Assets/IMG_2949.JPG" Width="500" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,-200,0,0"></Image>
+                <Button Content="Open" HorizontalAlignment="Left" Height="75" Margin="52,718,0,0" VerticalAlignment="Top" Width="208" Click="Button_Click"/>
+                <Button Content="Camera" HorizontalAlignment="Left" Height="75" Margin="302,717,0,0" VerticalAlignment="Top" Width="208"/>
+                <Button Content="Reset" HorizontalAlignment="Left" Height="75" Margin="562,717,0,0" VerticalAlignment="Top" Width="208"/>
+                <Button Content="Save" HorizontalAlignment="Left" Height="75" Margin="825,717,0,0" VerticalAlignment="Top" Width="208"/>
+                <Button Content="Cut" HorizontalAlignment="Left" Height="75" Margin="638,146,0,0" VerticalAlignment="Top" Width="208"/>
+                <Button Content="Draw" HorizontalAlignment="Left" Height="75" Margin="934,146,0,0" VerticalAlignment="Top" Width="208"/>
+                <Button Content="AddText" HorizontalAlignment="Left" Height="75" Margin="638,281,0,0" VerticalAlignment="Top" Width="208"/>
+                <Button Content="?" HorizontalAlignment="Left" Height="75" Margin="934,281,0,0" VerticalAlignment="Top" Width="208"/>
+                <Slider HorizontalAlignment="Left" Height="27" Margin="638,424,0,0" VerticalAlignment="Top" Width="504"/>
+                <Slider HorizontalAlignment="Left" Height="27" Margin="638,496,0,0" VerticalAlignment="Top" Width="504"/>
+                <Slider HorizontalAlignment="Left" Height="27" Margin="638,582,0,0" VerticalAlignment="Top" Width="504"/>
+
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

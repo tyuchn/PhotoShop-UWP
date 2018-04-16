@@ -8,6 +8,22 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <NavigationView Name="NavView" SelectionChanged="NavView_SelectionChanged">
+            <NavigationView.MenuItems>
 
+                <NavigationViewItem Icon="Contact" Content="Portrait" Tag="PortraitItem"/>
+                <NavigationViewItem Icon="Street" Content="Scenery" Tag="SceneryItem"/>
+                <NavigationViewItem Icon="Contact" Content="Food" Tag="FoodItem"/>
+
+            </NavigationView.MenuItems>
+            <NavigationView.Header>
+                Freedom
+            </NavigationView.Header>
+            <NavigationView.Content>
+                <Frame Name="MyFrame">
+
+                </Frame>
+            </NavigationView.Content>
+        </NavigationView>
     </Grid>
 </Page>

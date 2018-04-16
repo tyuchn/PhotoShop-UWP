@@ -25,6 +25,38 @@ namespace project
         public MainPage()
         {
             this.InitializeComponent();
+            MyFrame.Navigate(typeof(Page1));
+
+        }
+        private void NavView_SelectionChanged(
+             Windows.UI.Xaml.Controls.NavigationView sender,
+             NavigationViewSelectionChangedEventArgs args)
+        {
+            if (args.IsSettingsSelected)
+            {
+                NavView.Header = "SettingsPage";
+            }
+            else
+            {
+                NavigationViewItem item =
+                    args.SelectedItem as NavigationViewItem;
+
+                switch (item.Tag)
+                {
+                    case "PortraitItem":
+                        NavView.Header = "Portrait";
+                        break;
+
+                    case "SceneryItem":
+                        NavView.Header = "Scenery";
+                        break;
+
+                    case "FoodItem":
+                        NavView.Header = "Food";
+                        break;
+
+                }
+            }
         }
     }
 }

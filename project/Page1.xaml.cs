@@ -35,7 +35,7 @@ namespace project
             StorageFile file = await fp.PickSingleFileAsync();
             if (file != null)
             {
-                /*TextBlock.Text = "The player is playing: " + file.Name;
+                /*TextBlock.Text = "The Player is playing: " + file.Name;
                 var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
                 Interface.SetSource(stream, file.ContentType);*/
             }

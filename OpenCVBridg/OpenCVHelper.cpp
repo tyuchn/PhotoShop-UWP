@@ -37,7 +37,7 @@ bool OpenCVHelper::TryConvert(SoftwareBitmap^ from, Mat& convertedMat)
 
 	Mat mat(from->PixelHeight,
 		from->PixelWidth,
-		CV_8UC4, // assume input SoftwareBitmap is BGRA8
+		CV_8UC4, // Assume input SoftwareBitmap is BGRA8
 		(void*)pPixels);
 
 	// shallow copy because we want convertedMat.data = pPixels

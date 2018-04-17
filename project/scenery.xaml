@@ -23,13 +23,15 @@
                     <Button Content="Options" HorizontalAlignment="Left" Height="75" Margin="800,100,0,0" VerticalAlignment="Top" Width="208">
                         <Button.Flyout>
                             <MenuFlyout>
-                                <MenuFlyoutItem Text="Cut"/>
-                                <MenuFlyoutItem Text="Draw"/>
-                                <MenuFlyoutItem Text="AddText"/>
+                                <MenuFlyoutItem Text="Cut" Click="MenuFlyoutItem_Click1"/>
+                                <MenuFlyoutItem Text="Draw" Click="MenuFlyoutItem_Click2"/>
+                                <MenuFlyoutItem Text="AddText" Click="MenuFlyoutItem_Click3"/>
                             </MenuFlyout>
                         </Button.Flyout>
                     </Button>
+                    <Frame Name="MyFrame">
 
+                    </Frame>
 
                 </Grid>
             </ScrollViewer>

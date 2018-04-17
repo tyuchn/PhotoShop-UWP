@@ -95,6 +95,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="draw.xaml.cs">
+      <DependentUpon>draw.xaml</DependentUpon>
+    </Compile>
     <Compile Include="food.xaml.cs">
       <DependentUpon>food.xaml</DependentUpon>
     </Compile>
@@ -130,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="draw.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="food.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -48,5 +48,20 @@ namespace project
                 //this.TextBlock.Text = "Operation cancelled.";
             }
         }
+
+        private void MenuFlyoutItem_Click1(object sender, RoutedEventArgs e)
+        {
+            MyFrame.Navigate(typeof(draw));
+        }
+
+        private void MenuFlyoutItem_Click2(object sender, RoutedEventArgs e)
+        {
+            MyFrame.Navigate(typeof(draw));
+        }
+
+        private void MenuFlyoutItem_Click3(object sender, RoutedEventArgs e)
+        {
+            MyFrame.Navigate(typeof(draw));
+        }
     }
 }

@@ -46,5 +46,10 @@ namespace project
                 //this.TextBlock.Text = "Operation cancelled.";
             }
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            MyFrame.Navigate(typeof(draw));
+        }
     }
 }

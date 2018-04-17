@@ -1,0 +1,38 @@
+﻿<Page
+    x:Class="project.scenery"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:project"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <ScrollViewer>
+                <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+                    <TextBlock Name="TB" Text="处理界面" FontSize="48" HorizontalAlignment="Center"></TextBlock>
+                    <Image Source="Assets/IMG_2949.JPG" Width="500" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,-200,0,0"></Image>
+
+                    <Button Content="Open" HorizontalAlignment="Left" Height="75" Margin="52,718,0,0" VerticalAlignment="Top" Width="208" Click="Button_Click"/>
+                    <Button FontFamily="Segoe MDL2 Assets" Content="&#xE722;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="302,717,0,0" VerticalAlignment="Top" Width="208"/>
+                    <Button FontFamily="Segoe MDL2 Assets" Content="&#xE72C;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="562,717,0,0" VerticalAlignment="Top" Width="208"/>
+                    <Button FontFamily="Segoe MDL2 Assets" Content="&#xE74E;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="825,717,0,0" VerticalAlignment="Top" Width="208"/>
+
+                    <Button Content="Options" HorizontalAlignment="Left" Height="75" Margin="800,100,0,0" VerticalAlignment="Top" Width="208">
+                        <Button.Flyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="Cut"/>
+                                <MenuFlyoutItem Text="Draw"/>
+                                <MenuFlyoutItem Text="AddText"/>
+                            </MenuFlyout>
+                        </Button.Flyout>
+                    </Button>
+
+
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

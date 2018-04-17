@@ -159,6 +159,12 @@
       <Version>6.0.8</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OpenCVBridg\OpenCVBridg.vcxproj">
+      <Project>{53cc807b-f44a-41de-98f9-70596584c74d}</Project>
+      <Name>OpenCVBridg</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

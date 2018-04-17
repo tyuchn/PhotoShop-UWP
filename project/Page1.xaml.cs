@@ -5,14 +5,17 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
@@ -30,26 +33,49 @@ namespace project
         }
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            FileOpenPicker fp = new FileOpenPicker();
-            fp.FileTypeFilter.Add(".bmp");
-            fp.FileTypeFilter.Add(".jpg");
-            fp.FileTypeFilter.Add(".png");
-            StorageFile file = await fp.PickSingleFileAsync();
-            if (file != null)
+            FileOpenPicker fileOpenPicker = new FileOpenPicker();
+            fileOpenPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            fileOpenPicker.FileTypeFilter.Add(".jpg");
+            fileOpenPicker.ViewMode = PickerViewMode.Thumbnail;
+
+            var inputFile = await fileOpenPicker.PickSingleFileAsync();
+
+            if (inputFile == null)
             {
-                /*TextBlock.Text = "The Player is playing: " + file.Name;
-                var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
-                Interface.SetSource(stream, file.ContentType);*/
+                // The user cancelled the picking operation
+                return;
             }
-            else
+
+            SoftwareBitmap inputBitmap;
+            using (IRandomAccessStream stream = await inputFile.OpenAsync(FileAccessMode.Read))
             {
-                //this.TextBlock.Text = "Operation cancelled.";
+                // Create the decoder from the stream
+                BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
+
+                // Get the SoftwareBitmap representation of the file
+                inputBitmap = await decoder.GetSoftwareBitmapAsync();
             }
+
+            if (inputBitmap.BitmapPixelFormat != BitmapPixelFormat.Bgra8
+                        || inputBitmap.BitmapAlphaMode != BitmapAlphaMode.Premultiplied)
+            {
+                inputBitmap = SoftwareBitmap.Convert(inputBitmap, BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied);
+            }
+
+            SoftwareBitmap outputBitmap = new SoftwareBitmap(inputBitmap.BitmapPixelFormat, inputBitmap.PixelWidth, inputBitmap.PixelHeight, BitmapAlphaMode.Premultiplied);
+
+
+            var helper = new OpenCVBridge.OpenCVHelper();
+            helper.Blur(inputBitmap, outputBitmap);
+
+            var bitmapSource = new SoftwareBitmapSource();
+            await bitmapSource.SetBitmapAsync(outputBitmap);
+            imageControl.Source = bitmapSource;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        /*private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             MyFrame.Navigate(typeof(draw));
-        }
+        }*/
     }
 }

@@ -12,7 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Class1.h" />
     <ClInclude Include="OpenCVHelper.h" />
   </ItemGroup>
   <ItemGroup>

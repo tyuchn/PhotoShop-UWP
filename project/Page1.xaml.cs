@@ -97,6 +97,11 @@ namespace project
         {
             MyFrame.Navigate(typeof(draw));
         }
+        private void Button_Click_afilter(object sender, RoutedEventArgs e)
+        {
+            MyFrame.Navigate(typeof(addFilter));
+        }
+
 
         private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
@@ -141,6 +146,11 @@ namespace project
             {
                 //information.Text = "取消保存";
             }
+        }
+
+        private void MyFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+
         }
     }
 }

@@ -13,7 +13,7 @@
 
                 <NavigationViewItem Icon="Contact" Content="Portrait" Tag="PortraitItem"/>
                 <NavigationViewItem Icon="Street" Content="Scenery" Tag="SceneryItem"/>
-                <NavigationViewItem Icon="Contact" Content="Food" Tag="FoodItem"/>
+                <NavigationViewItem Icon="MapPin"  Content="Food" Tag="FoodItem"/>
 
             </NavigationView.MenuItems>
             <NavigationView.Header>

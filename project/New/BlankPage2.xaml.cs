@@ -494,6 +494,11 @@ namespace project.New
                 return source;
             }
         }
+
+        private void Ok_Click(object sender, RoutedEventArgs e)
+        {
+            GenerateResultImage();
+        }
     }
 
     public delegate void ImageEditedCompletedEventHandler(BitmapImage image);

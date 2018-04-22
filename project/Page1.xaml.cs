@@ -99,10 +99,9 @@ namespace project
         }
         private void Button_Click_afilter(object sender, RoutedEventArgs e)
         {
-            MyFrame.Navigate(typeof(addFilter));
+            MyFrame.Navigate(typeof(Addfilter));
         }
-
-
+        
         private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
             var saveFile = new FileSavePicker();

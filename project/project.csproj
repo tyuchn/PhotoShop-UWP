@@ -92,17 +92,26 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Addfilter.xaml.cs">
+      <DependentUpon>Addfilter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="draw.xaml.cs">
       <DependentUpon>draw.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DrawingObjects\CropUI.cs" />
+    <Compile Include="DrawingObjects\IDrawingUI.cs" />
+    <Compile Include="DrawingObjects\TagUI.cs" />
     <Compile Include="food.xaml.cs">
       <DependentUpon>food.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="New\BlankPage2.xaml.cs">
+      <DependentUpon>BlankPage2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
@@ -111,9 +120,8 @@
     <Compile Include="scenery.xaml.cs">
       <DependentUpon>scenery.xaml</DependentUpon>
     </Compile>
-    <Compile Include="yuya.xaml.cs">
-      <DependentUpon>yuya.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Tools\HttpTool.cs" />
+    <Compile Include="Tools\UWPPlatformTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -121,6 +129,14 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\00.png" />
+    <Content Include="Assets\01.png" />
+    <Content Include="Assets\02.png" />
+    <Content Include="Assets\03.png" />
+    <Content Include="Assets\04.png" />
+    <Content Include="Assets\05.png" />
+    <Content Include="Assets\2.15.png" />
+    <Content Include="Assets\fa.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -135,6 +151,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Addfilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="draw.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -147,15 +167,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="New\BlankPage2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Page1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="scenery.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="yuya.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -169,8 +189,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="project_TemporaryKey.pfx" />
+    <None Include="play_TemporaryKey.pfx" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

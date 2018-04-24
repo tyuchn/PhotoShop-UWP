@@ -117,7 +117,7 @@ namespace project
             parameters.Add("CropWidthPixals", 300);
             parameters.Add("CropHeightPixals", 300);
             //调用系统自带截图并返回结果 
-           // var result = await Launcher.LaunchUriForResultsAsync(new Uri("microsoft.windows.photos.crop:"), options, parameters);
+            // var result = await Launcher.LaunchUriForResultsAsync(new Uri("microsoft.windows.photos.crop:"), options, parameters);
             var result = await Launcher.LaunchUriForResultsAsync(new Uri("microsoft.windows.photos.crop:"), options, parameters);
             if (result.Status == LaunchUriStatus.Success && result.Result != null)
             {
@@ -143,59 +143,6 @@ namespace project
 
 
         }
-
-
-
-
-
-
-
-
-
-        /* public async static Task<string> SendPostRequest(string url)
-         {
-             try
-             {
-                 Dictionary<string, object> dic = new Dictionary<string, object>();
-                                  dic.Add("GWnumber", setHeadPicture.GWnumber);
-                                  dic.Add("token", setHeadPicture.Token);
-                                  dic.Add("file", setHeadPicture.File);//file值是StorageFile类型
-                                  dic.Add("systemType", setHeadPicture.SystemType);
-
-                  HttpMultipartFormDataContent form = new HttpMultipartFormDataContent();
-                                  foreach (KeyValuePair<string, object> item in dic)
-                                      {
-                                          if (item.Key == "file")
-                                              {
-                                                  StorageFile file = item.Value as StorageFile;
-                                                 HttpStreamContent streamContent = new HttpStreamContent(await file.OpenReadAsync());
-                                                  form.Add(streamContent, item.Key, "file.jpg");//注意:这里的值是必须的,图片所以使用的是HttpStreamContent
-                                             }
-                                          else
-                     {
-                                                 form.Add(new HttpStringContent(item.Value + ""), item.Key);
-                                             }
-                                    }
-                            HttpClient httpClient = new HttpClient();
-                                 HttpResponseMessage response = await httpClient.PostAsync(new Uri(url), form).AsTask();
-                                 var contentType = response.Content.Headers.ContentType;
-                               if (string.IsNullOrEmpty(contentType.CharSet))
-                                     {
-                                       contentType.CharSet = "utf-8";
-                                     }
-                                 return await response.Content.ReadAsStringAsync();
-                           }
-                             catch (Exception ex)
-            {
-                                 throw;
-                           }
-                   }
-                   */
-
-
-
-
-
 
 
 

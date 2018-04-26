@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
+
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
 namespace project
@@ -37,17 +38,16 @@ namespace project
             fileOpenPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
             fileOpenPicker.FileTypeFilter.Add(".jpg");
             fileOpenPicker.ViewMode = PickerViewMode.Thumbnail;
-
-            var inputFile = await fileOpenPicker.PickSingleFileAsync();
-
-            if (inputFile == null)
+            StorageFile file = await fileOpenPicker.PickSingleFileAsync();
+            if (file != null)
             {
-                // The user cancelled the picking operation
-                return;
+                IRandomAccessStream ir = await file.OpenAsync(FileAccessMode.ReadWrite);
+                BitmapImage bi = new BitmapImage();
+                await bi.SetSourceAsync(ir);
+                imageControl.Source = bi;
             }
-
             SoftwareBitmap inputBitmap;
-            using (IRandomAccessStream stream = await inputFile.OpenAsync(FileAccessMode.Read))
+            using (IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.Read))
             {
                 // Create the decoder from the stream
                 BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
@@ -72,6 +72,7 @@ namespace project
             await bitmapSource.SetBitmapAsync(outputBitmap);
             imageControl.Source = bitmapSource;
         }
+
 
         /*private void Button_Click_1(object sender, RoutedEventArgs e)
         {

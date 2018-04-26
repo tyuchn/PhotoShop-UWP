@@ -160,9 +160,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OpenCVBridg\OpenCVBridg.vcxproj">
-      <Project>{53cc807b-f44a-41de-98f9-70596584c74d}</Project>
-      <Name>OpenCVBridg</Name>
+    <ProjectReference Include="..\OpenCVBridge\OpenCVBridge.vcxproj">
+      <Project>{7eddb0ef-b07a-4b38-a4b1-5211da8fe0d1}</Project>
+      <Name>OpenCVBridge</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

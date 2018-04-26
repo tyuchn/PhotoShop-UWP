@@ -45,7 +45,7 @@ namespace project
                 {
                     case "PortraitItem":
                         NavView.Header = "Portrait";
-                        MyFrame.Navigate(typeof(Page1));
+                        MyFrame.Navigate(typeof(Page1));               
                         break;
 
                     case "SceneryItem":

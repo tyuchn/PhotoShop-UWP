@@ -12,12 +12,12 @@
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
                 <TextBlock Name="TB" Text="处理界面" FontSize="48" HorizontalAlignment="Center"></TextBlock>
-                <Image Name="Img" Height="500" Width="500" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,100,0,0"></Image>
+                <Image Name="Img" Height="500" Width="500" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,0,0,200"></Image>
 
-                <Button Content="Open" HorizontalAlignment="Left" Height="75" Margin="52,718,0,0" VerticalAlignment="Top" Width="208" Click="Open_Click"/>
-                <Button FontFamily="Segoe MDL2 Assets" Content="&#xE722;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="302,717,0,0" VerticalAlignment="Top" Width="208"/>
+                <Button Content="Open" HorizontalAlignment="Left" Height="75" Margin="52,718,0,0" VerticalAlignment="Top" Width="208" Click="Button_Click"/>
+                <Button FontFamily="Segoe MDL2 Assets" Content="&#xE722;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="302,717,0,0" VerticalAlignment="Top" Width="208" Click="Launch_Camera"/>
                 <Button FontFamily="Segoe MDL2 Assets" Content="&#xE72C;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="562,717,0,0" VerticalAlignment="Top" Width="208"/>
-                <Button FontFamily="Segoe MDL2 Assets" Content="&#xE74E;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="825,717,0,0" VerticalAlignment="Top" Width="208" Click="Save_Click"/>
+                <Button FontFamily="Segoe MDL2 Assets" Content="&#xE74E;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="825,717,0,0" VerticalAlignment="Top" Width="208"/>
 
                 <Button Content="Options" HorizontalAlignment="Left" Height="75" Margin="800,100,0,0" VerticalAlignment="Top" Width="208">
                     <Button.Flyout>

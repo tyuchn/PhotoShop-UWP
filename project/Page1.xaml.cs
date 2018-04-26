@@ -21,6 +21,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Windows.Media.Capture;
+
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -150,6 +152,33 @@ namespace project
         private void MyFrame_Navigated(object sender, NavigationEventArgs e)
         {
 
+        }
+
+        private async void Launch_Camera(object sender, RoutedEventArgs e)
+        {
+            CameraCaptureUI captureUI = new CameraCaptureUI();
+            captureUI.PhotoSettings.Format = CameraCaptureUIPhotoFormat.Jpeg;
+            captureUI.PhotoSettings.CroppedSizeInPixels = new Size(200, 200);
+
+            StorageFile photo = await captureUI.CaptureFileAsync(CameraCaptureUIMode.Photo);
+
+            if (photo == null)
+            {
+                // User cancelled photo capture
+                return;
+            }
+
+            IRandomAccessStream stream = await photo.OpenAsync(FileAccessMode.Read);
+            BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
+            SoftwareBitmap softwareBitmap = await decoder.GetSoftwareBitmapAsync();
+            SoftwareBitmap softwareBitmapBGR8 = SoftwareBitmap.Convert(softwareBitmap,
+        BitmapPixelFormat.Bgra8,
+        BitmapAlphaMode.Premultiplied);
+
+            SoftwareBitmapSource bitmapSource = new SoftwareBitmapSource();
+            await bitmapSource.SetBitmapAsync(softwareBitmapBGR8);
+
+            Img.Source = bitmapSource;
         }
     }
 }

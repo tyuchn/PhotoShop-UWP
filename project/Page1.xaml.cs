@@ -21,6 +21,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using project.New;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -57,7 +58,6 @@ namespace project
 
             if (file != null)
             {
-                CutPicture(file);
                 using (IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.Read))
                 {
                     var srcImage = new BitmapImage();
@@ -68,7 +68,7 @@ namespace project
             
         }
         
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_Draw(object sender, RoutedEventArgs e)
         {
             MyFrame.Navigate(typeof(draw));
         }
@@ -124,7 +124,7 @@ namespace project
                 //对裁剪后图像的下一步处理 
                 try
                 {
-                    // 载入已保存的裁剪后图片 
+                     //载入已保存的裁剪后图片 
                     var stream = await destination.OpenReadAsync();
                     var bitmap = new BitmapImage();
                     await bitmap.SetSourceAsync(stream);
@@ -144,7 +144,44 @@ namespace project
 
         }
 
+        private async void Button_Click_afilter(object sender, RoutedEventArgs e)
+        {
+            FileOpenPicker fo = new FileOpenPicker();
+            fo.FileTypeFilter.Add(".png");
+            fo.FileTypeFilter.Add(".jpg");
+            fo.SuggestedStartLocation = PickerLocationId.Desktop;
 
+            var f = await fo.PickSingleFileAsync();
+            if (f != null)
+            {
+                BlankPage2 editor = new BlankPage2();
+                editor.Show(f);
+
+                editor.ImageEditedCompleted += (image_edited) =>
+                {
+                    Img.Source = image_edited;
+                };
+            }
+        }
+        private async void Button_Click_scrawl(object sender, RoutedEventArgs e)
+        {
+            FileOpenPicker fo = new FileOpenPicker();
+            fo.FileTypeFilter.Add(".png");
+            fo.FileTypeFilter.Add(".jpg");
+            fo.SuggestedStartLocation = PickerLocationId.Desktop;
+
+            var f = await fo.PickSingleFileAsync();
+            if (f != null)
+            {
+                scrawl editor = new scrawl();
+                editor.Show(f);
+
+                editor.ImageEditedCompleted += (image_edited) =>
+                {
+                    Img.Source = image_edited;
+                };
+            }
+        }
 
         private async void Save_Click(object sender, RoutedEventArgs e)
         {
@@ -185,6 +222,6 @@ namespace project
                     await encoder.FlushAsync();
                 }
             }
-        }
+        }    
     }
 }

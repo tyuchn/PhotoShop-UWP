@@ -39,22 +39,6 @@ namespace project
 
         private async void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            /*StorageFolder storageFolder = KnownFolders.SavedPictures;
-            var file = await storageFolder.CreateFileAsync("sample.jpg", CreationCollisionOption.ReplaceExisting);
-            CanvasDevice device = CanvasDevice.GetSharedDevice();
-            CanvasRenderTarget renderTarget = new CanvasRenderTarget(device, (int)inkCanvas.ActualWidth, (int)inkCanvas.ActualHeight, 96);
-            using (var ds = renderTarget.CreateDrawingSession())
-            {
-                ds.Clear(Colors.White);
-                ds.DrawInk(inkCanvas.InkPresenter.StrokeContainer.GetStrokes());
-            }
-
-            using (var fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
-            {
-                await renderTarget.SaveAsync(fileStream, CanvasBitmapFileFormat.Jpeg, 1f);
-            }*/
-
-
             var saveFile = new FileSavePicker();
             //初始位置  
             saveFile.SuggestedStartLocation = PickerLocationId.PicturesLibrary;

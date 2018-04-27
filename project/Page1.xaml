@@ -12,23 +12,22 @@
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
                 <TextBlock Name="TB" Text="处理界面" FontSize="48" HorizontalAlignment="Center"></TextBlock>
-                <Image Source="Assets/IMG_2949.JPG" Width="500" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,-200,0,0"></Image>
-
-                <Button Content="Open" HorizontalAlignment="Left" Height="75" Margin="50,719,0,0" VerticalAlignment="Top" Width="208" Click="Button_Click"/>
+                <Image Name="Img"  Width="500" Height="500" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,0,0,200"></Image>
+            
+                    <Button Content="Open" HorizontalAlignment="Left" Height="75" Margin="52,718,0,0" VerticalAlignment="Top" Width="208" Click="Open_Click"/>
+                <Button FontFamily="Segoe MDL2 Assets" Content="&#xE722;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="302,717,0,0" VerticalAlignment="Top" Width="208" Click="Launch_Camera"/>
+                <Button FontFamily="Segoe MDL2 Assets" Content="&#xE72C;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="562,717,0,0" VerticalAlignment="Top" Width="208"/>
+                <Button FontFamily="Segoe MDL2 Assets" Content="&#xE74E;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="825,717,0,0" VerticalAlignment="Top" Width="208" Click="Save_Click"/>
+                    <Button Content="Cut" HorizontalAlignment="Left" Height="75" Margin="638,146,0,0" VerticalAlignment="Top" Width="208" Click="Cut_Click"/>
+                    <Button Content="Draw" HorizontalAlignment="Left" Height="75" Margin="934,146,0,0" VerticalAlignment="Top" Width="208" Click="Button_Click_Draw"/>
+                    <Button Content="AddText" HorizontalAlignment="Left" Height="75" Margin="638,281,0,0" VerticalAlignment="Top" Width="208" Click="Button_Click_scrawl"/>
+                <Button Content="AddFilter" HorizontalAlignment="Left" Height="75" Margin="934,281,0,0" VerticalAlignment="Top" Width="208" Click="Button_Click_afilter"/>
                 
-                <Button FontFamily="Segoe MDL2 Assets" Content="&#xE72C;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="751,717,0,0" VerticalAlignment="Top" Width="208"/>
-                <Button FontFamily="Segoe MDL2 Assets" Content="&#xE74E;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="991,717,0,0" VerticalAlignment="Top" Width="208"/>
-                <Button Content="Cut" HorizontalAlignment="Left" Height="75" Margin="638,146,0,0" VerticalAlignment="Top" Width="208"/>
-                <Button Content="Draw" HorizontalAlignment="Left" Height="75" Margin="934,146,0,0" VerticalAlignment="Top" Width="208" />
-                <Button Content="AddText" HorizontalAlignment="Left" Height="75" Margin="638,281,0,0" VerticalAlignment="Top" Width="208"/>
-                <Button Content="?" HorizontalAlignment="Left" Height="75" Margin="934,281,0,0" VerticalAlignment="Top" Width="208"/>
-                <Slider HorizontalAlignment="Left" Height="27" Margin="638,424,0,0" VerticalAlignment="Top" Width="504"/>
-                <Slider HorizontalAlignment="Left" Height="27" Margin="638,496,0,0" VerticalAlignment="Top" Width="504"/>
-                <Slider HorizontalAlignment="Left" Height="27" Margin="638,582,0,0" VerticalAlignment="Top" Width="504"/>
-                <Button FontFamily="Segoe MDL2 Assets" Content="&#xE722;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="512,719,0,0" VerticalAlignment="Top" Width="208"/>
+                 <Frame Name="MyFrame">
+
+                </Frame>
 
             </Grid>
         </ScrollViewer>
-        <Image Name="imageControl" HorizontalAlignment="Left" Height="425" Margin="59,165,0,0" VerticalAlignment="Top" Width="505"/>
     </Grid>
 </Page>

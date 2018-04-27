@@ -29,9 +29,9 @@ namespace project
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class food : Page
+    public sealed partial class scenery : Page
     {
-        public food()
+        public scenery()
         {
             this.InitializeComponent();
         }
@@ -99,16 +99,15 @@ namespace project
         {
             MyFrame.Navigate(typeof(draw));
         }
-
         private void MenuFlyoutItem_Click2(object sender, RoutedEventArgs e)
         {
             MyFrame.Navigate(typeof(draw));
         }
-
         private void MenuFlyoutItem_Click3(object sender, RoutedEventArgs e)
         {
             MyFrame.Navigate(typeof(draw));
         }
+
         private async void Launch_Camera(object sender, RoutedEventArgs e)
         {
             CameraCaptureUI captureUI = new CameraCaptureUI();

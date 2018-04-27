@@ -244,7 +244,7 @@ namespace project
                 }
             }
         }
-
+        
 
         private async void Launch_Camera(object sender, RoutedEventArgs e)
         {
@@ -273,6 +273,9 @@ namespace project
             Img.Source = bitmapSource;
         }
 
-
+        private void Button_delete(object sender, RoutedEventArgs e)
+        {
+            MyFrame.Navigate(typeof(Page1));
+        }
     }
 }

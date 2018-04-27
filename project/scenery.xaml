@@ -6,34 +6,56 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <ScrollViewer>
-                <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources >
+        <ResourceDictionary>
+            <AcrylicBrush x:Key="Scenerybrush"
+                  BackgroundSource="HostBackdrop"
+                  TintOpacity="0.5"
+                  TintColor="Pink" 
+                  FallbackColor="White" 
+                  />
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid Background="{ThemeResource Scenerybrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="7*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-                    <TextBlock Name="TB" Text="处理界面" FontSize="48" HorizontalAlignment="Center"></TextBlock>
-                    <Image Name="Img" Width="500" Height="500" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,0,0,200"></Image>
+        <TextBlock  Grid.Row="0"
+                    Name="TB" 
+                   Text="Scenery" FontSize="48" HorizontalAlignment="Center" ></TextBlock>
+        <Image Name="Img" Grid.Row="1" Grid.ColumnSpan="2"
+               Width="800" Height="600" VerticalAlignment="Top"  HorizontalAlignment="Left"  Margin="200,20,0,00"></Image>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Button FontFamily="Segoe MDL2 Assets"  Content="&#xE8C6;" Background="Pink" Opacity="0.5" FontSize="36"
+                    Height="75"  HorizontalAlignment="Right"   VerticalAlignment="Top" Width="100"
+                    Click="Scenery_Click1"/>
+            <Button   FontFamily="Segoe MDL2 Assets"  Content="&#xE929;" Background="Pink" Opacity="0.5" FontSize="36"
+                    Height="75"  HorizontalAlignment="Right"   VerticalAlignment="Top" Width="100"
+                    Click="Scenery_Click3"/>
+            <Button  FontFamily="Segoe MDL2 Assets" Content="&#xE7FA;" Background="Pink" Opacity="0.5" FontSize="36"
+                    Height="75"  HorizontalAlignment="Right"   VerticalAlignment="Top" Width="100"
+                    Click="Scenery_Click4"/>
+            <Button FontFamily="Segoe MDL2 Assets" Content="&#xE8E5;"
+                    Background="Pink" Opacity="0.5" FontSize="36"
+                    HorizontalAlignment="Right"  Height="75"   VerticalAlignment="Top" Width="100" Click="Scenery_Click5"/>
+            <Button FontFamily="Segoe MDL2 Assets"
+                    Background="Pink" Opacity="0.5"
+                    Content="&#xE722;"  FontSize="36"  Height="75" HorizontalAlignment="Right"    VerticalAlignment="Top" Width="100" Click="Scenery_Click6"/>
+            <Button FontFamily="Segoe MDL2 Assets" Content="&#xE72C;" Background="Pink" Opacity="0.5"
+                    FontSize="36" HorizontalAlignment="Right"  Height="75" VerticalAlignment="Top" Width="100"  Click="Scenery_Click7"/>
+            <Button FontFamily="Segoe MDL2 Assets" Content="&#xE74E;" Background="Pink" Opacity="0.5" FontSize="36"
+                    HorizontalAlignment="right" Height="75" VerticalAlignment="Top" Width="100"   Click="Scenery_Click8"/>
+        </StackPanel>
 
-                    <Button Content="Open" HorizontalAlignment="Left" Height="75" Margin="52,718,0,0" VerticalAlignment="Top" Width="208" Click="Button_Click"/>
-                    <Button FontFamily="Segoe MDL2 Assets" Content="&#xE722;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="302,717,0,0" VerticalAlignment="Top" Width="208" Click="Launch_Camera"/>
-                    <Button FontFamily="Segoe MDL2 Assets" Content="&#xE72C;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="562,717,0,0" VerticalAlignment="Top" Width="208"/>
-                    <Button FontFamily="Segoe MDL2 Assets" Content="&#xE74E;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="825,717,0,0" VerticalAlignment="Top" Width="208"/>
+        <Frame Name="MyFrame">
 
-                    <Button Content="Options" HorizontalAlignment="Left" Height="75" Margin="800,100,0,0" VerticalAlignment="Top" Width="208">
-                        <Button.Flyout>
-                            <MenuFlyout Placement="Bottom">
-                                <MenuFlyoutItem Text="Cut" Click="MenuFlyoutItem_Click1"/>
-                                <MenuFlyoutItem Text="Draw" Click="MenuFlyoutItem_Click2"/>
-                                <MenuFlyoutItem Text="AddText" Click="MenuFlyoutItem_Click3"/>
-                            </MenuFlyout>
-                        </Button.Flyout>
-                    </Button>
-                    <Frame Name="MyFrame">
+        </Frame>
 
-                    </Frame>
-
-                </Grid>
-            </ScrollViewer>
-        </Grid>
     </Grid>
 </Page>

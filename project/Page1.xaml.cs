@@ -204,7 +204,7 @@ namespace project
             }
         }
 
-        private async void Save_Click(object sender, RoutedEventArgs e)
+        public async void Save_Click(object sender, RoutedEventArgs e)
         {
             var saveFile = new FileSavePicker();
             //初始位置  

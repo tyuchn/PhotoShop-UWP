@@ -27,9 +27,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{53cc807b-f44a-41de-98f9-70596584c74d}</ProjectGuid>
+    <ProjectGuid>{74d727fa-7c35-41cb-ab13-fa4fcb1eb557}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
-    <RootNamespace>OpenCVBridg</RootNamespace>
+    <RootNamespace>OpenCVBridge</RootNamespace>
     <DefaultLanguage>zh-CN</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
@@ -206,12 +206,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="OpenCVHelper.h" />
+    <ClInclude Include="..\..\..\OPic\OpenCVBridge\OpenCVHelper.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Class1.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="OpenCVHelper.cpp" />
+    <ClCompile Include="..\..\..\OPic\OpenCVBridge\OpenCVHelper.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

@@ -2,18 +2,17 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Resources">
-      <UniqueIdentifier>5087fab0-a063-4f39-b51e-8fee0e12366f</UniqueIdentifier>
+      <UniqueIdentifier>794dc09a-13a1-4bab-a03d-ac875b977022</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="OpenCVHelper.cpp" />
+    <ClCompile Include="..\..\..\OPic\OpenCVBridge\OpenCVHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Class1.h" />
-    <ClInclude Include="OpenCVHelper.h" />
+    <ClInclude Include="..\..\..\OPic\OpenCVBridge\OpenCVHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

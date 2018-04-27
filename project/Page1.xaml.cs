@@ -53,18 +53,39 @@ namespace project
             //选取单个文件  
             Windows.Storage.StorageFile file = await openPicker.PickSingleFileAsync();
 
+            //var inputFile = await openPicker.PickSingleFileAsync();
 
-
-
-            if (file != null)
+            if (file == null)
             {
-                using (IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.Read))
-                {
-                    var srcImage = new BitmapImage();
-                    await srcImage.SetSourceAsync(stream);
-                    Img.Source = srcImage;
-                }
+                // The user cancelled the picking operation
+                return;
             }
+
+            SoftwareBitmap inputBitmap;
+            using (IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.Read))
+            {
+                // Create the decoder from the stream
+                BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
+
+                // Get the SoftwareBitmap representation of the file
+                inputBitmap = await decoder.GetSoftwareBitmapAsync();
+            }
+
+            if (inputBitmap.BitmapPixelFormat != BitmapPixelFormat.Bgra8
+                        || inputBitmap.BitmapAlphaMode != BitmapAlphaMode.Premultiplied)
+            {
+                inputBitmap = SoftwareBitmap.Convert(inputBitmap, BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied);
+            }
+
+            SoftwareBitmap outputBitmap = new SoftwareBitmap(inputBitmap.BitmapPixelFormat, inputBitmap.PixelWidth, inputBitmap.PixelHeight, BitmapAlphaMode.Premultiplied);
+
+
+            var helper = new OpenCVBridge.OpenCVHelper();
+            helper.Blur(inputBitmap, outputBitmap);
+
+            var bitmapSource = new SoftwareBitmapSource();
+            await bitmapSource.SetBitmapAsync(outputBitmap);
+            Img.Source = bitmapSource;
 
         }
 

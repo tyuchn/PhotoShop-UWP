@@ -8,11 +8,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="..\..\OpenCVHelper.cpp" />
+    <ClCompile Include="OpenCVHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="..\..\OpenCVHelper.h" />
+    <ClInclude Include="OpenCVHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -91,7 +91,7 @@ namespace project
 
         private void Button_Click_Draw(object sender, RoutedEventArgs e)
         {
-            MyFrame.Navigate(typeof(draw));
+            Frame.Navigate(typeof(draw));
         }
         private async void Cut_Click(object sender, RoutedEventArgs e)
         {

@@ -9,7 +9,17 @@
      xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     d:DesignHeight="750"
     d:DesignWidth="1800">
-    <Grid Name="MainGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources >
+        <ResourceDictionary>
+            <AcrylicBrush x:Key="Scenerybrush"
+                  BackgroundSource="HostBackdrop"
+                  TintOpacity="0.5"
+                  TintColor="Pink" 
+                  FallbackColor="White" 
+                  />
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid Name="MainGrid" Background="{ThemeResource Scenerybrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>

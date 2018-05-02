@@ -277,5 +277,26 @@ namespace project
         {
             MyFrame.Navigate(typeof(Page1));
         }
+
+
+        private async void Paster_Click(object sender, RoutedEventArgs e)
+        {
+            FileOpenPicker fo = new FileOpenPicker();
+            fo.FileTypeFilter.Add(".png");
+            fo.FileTypeFilter.Add(".jpg");
+            fo.SuggestedStartLocation = PickerLocationId.Desktop;
+
+            var f = await fo.PickSingleFileAsync();
+            if (f != null)
+            {
+                paster editor = new paster();
+                editor.Show(f);
+
+                editor.ImageEditedCompleted += (image_edited) =>
+                {
+                    Img.Source = image_edited;
+                };
+            }
+        }
     }
 }

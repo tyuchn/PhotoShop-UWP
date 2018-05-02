@@ -23,7 +23,8 @@
                     <Button Content="AddText" HorizontalAlignment="Left" Height="75" Margin="638,281,0,0" VerticalAlignment="Top" Width="208" Click="Button_Click_scrawl"/>
                 <Button Content="AddFilter" HorizontalAlignment="Left" Height="75" Margin="934,281,0,0" VerticalAlignment="Top" Width="208" Click="Button_Click_afilter"/>
                 <Button Content="模糊" HorizontalAlignment="Left" Height="75" Margin="934,400,0,0" VerticalAlignment="Top" Width="208" Click="Open_Click"/>
-                 <Frame Name="MyFrame">
+                <Button Content="Paster" HorizontalAlignment="Left" Height="75" Margin="638,400,0,0" VerticalAlignment="Top" Width="208" Click="Paster_Click" />
+                <Frame Name="MyFrame">
 
                 </Frame>
 

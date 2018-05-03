@@ -18,9 +18,11 @@
             <Setter Property="BorderThickness" Value="2" />
             <Setter Property="Foreground" Value="Red" />
         </Style>
+
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
         <ScrollViewer>
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -38,6 +40,10 @@
                 <Button Content="AddFilter" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="330,281,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_afilter"/>
                 <Button Content="Blur" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="50,400,0,0" VerticalAlignment="Top" Width="150" Click="mohu_Click"/>
                 <Button Content="Paster" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="330,400,0,0" VerticalAlignment="Top" Width="150" Click="Paster_Click"/>
+                <Button  Content="light" Background="Gray"  Opacity="0.5"
+                    FontSize="36" HorizontalAlignment="left"  Height="75" Margin="330,500,0,0" VerticalAlignment="Top" Width="150"  
+                    Click="Button_Clicknew"/>
+
                 <Frame Name="MyFrame">
 
                 </Frame>

@@ -390,8 +390,40 @@ namespace project
 
             Img.Source = bitmapSource;
         }
+        private async void Button_Clicknew(object sender, RoutedEventArgs e)
+        {
+            string desiredName = DateTime.Now.Ticks + ".jpg";
+            StorageFolder applicationFolder = ApplicationData.Current.LocalFolder;
+            StorageFolder folder = await applicationFolder.CreateFolderAsync("Pic", CreationCollisionOption.OpenIfExists);
+            StorageFile saveFile = await folder.CreateFileAsync(desiredName, CreationCollisionOption.OpenIfExists);
+            RenderTargetBitmap bitmap = new RenderTargetBitmap();
+            await bitmap.RenderAsync(Img);
+            var pixelBuffer = await bitmap.GetPixelsAsync();
+            using (var fileStream = await saveFile.OpenAsync(FileAccessMode.ReadWrite))
+            {
+                var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, fileStream);
+                encoder.SetPixelData(BitmapPixelFormat.Bgra8,
+                    BitmapAlphaMode.Ignore,
+                     (uint)bitmap.PixelWidth,
+                     (uint)bitmap.PixelHeight,
+                     DisplayInformation.GetForCurrentView().LogicalDpi,
+                     DisplayInformation.GetForCurrentView().LogicalDpi,
+                     pixelBuffer.ToArray());
+                await encoder.FlushAsync();
+            }
 
-    
+            if (saveFile != null)
+            {
+                BlankPage1 editor = new BlankPage1();
+                editor.Show(saveFile);
+
+                editor.ImageEditedCompleted += (image_edited) =>
+                {
+                    Img.Source = image_edited;
+                };
+            }
+        }
+
     }
 }
 

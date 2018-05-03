@@ -82,11 +82,7 @@ namespace project.New
             }
 
             SetCanvas();
-
-            if (UWPPlatformTool.IsMobile)
-            {
-                popup.VerticalOffset = 24;
-            }
+           
             border.Child = this;
 
             popup.Child = border;
@@ -120,21 +116,15 @@ namespace project.New
         private async void Current_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
         {
             var height = ApplicationView.GetForCurrentView().VisibleBounds.Height;
-            var width = ApplicationView.GetForCurrentView().VisibleBounds.Width;
-
-            if (UWPPlatformTool.IsMobile)
-            {
-                border.Width = this.Width = width;
-                border.Height = this.Height = height;
-            }
-            else
-            {
+            var width = ApplicationView.GetForCurrentView().VisibleBounds.Width; 
+            
+            
                 border.Width = width;
                 border.Height = height;
 
                 this.Height = height * 0.8;
                 this.Width = this.Height * 1.6;
-            }
+            
             SetCanvas();
             MyCanvas.Invalidate();
             await Task.Delay(10);

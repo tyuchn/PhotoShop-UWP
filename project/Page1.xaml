@@ -7,42 +7,57 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Page.Resources>
-        <Style x:Key="BasicStyle" TargetType="ContentControl">
-            <Setter Property="Width" Value="130" />
-            <Setter Property="Height" Value="30" />
-        </Style>
+        <ResourceDictionary>
+            <AcrylicBrush x:Key="Scenerybrush"
+                  BackgroundSource="HostBackdrop"
+                  TintOpacity="0.5"
+                  TintColor="Pink" 
+                  FallbackColor="White" 
+                  />
+            <Style x:Key="BasicStyle" TargetType="ContentControl">
+                <Setter Property="Width" Value="130" />
+                <Setter Property="Height" Value="30" />
+            </Style>
 
-        <Style x:Key="ButtonStyle" TargetType="Button" 
+            <Style x:Key="ButtonStyle" TargetType="Button" 
            BasedOn="{StaticResource BasicStyle}">
-            <Setter Property="BorderBrush" Value="Orange" />
-            <Setter Property="BorderThickness" Value="2" />
-            <Setter Property="Foreground" Value="Red" />
-        </Style>
-
+                <Setter Property="BorderBrush" Value="Orange" />
+                <Setter Property="BorderThickness" Value="2" />
+                <Setter Property="Foreground" Value="Red" />
+            </Style>
+        </ResourceDictionary>
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource Scenerybrush}">
 
         <ScrollViewer>
-            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <Grid Background="{ThemeResource Scenerybrush}">
 
-                <TextBlock Name="TB" Text="处理界面" FontSize="48" HorizontalAlignment="Center"></TextBlock>
-                <Image Name="Img"  Width="500" Height="500" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="700,120,0,200" Source="/Assets/rw.jpg"></Image>
+                <TextBlock Name="TB" Text="Portrait" FontSize="48" HorizontalAlignment="Center"></TextBlock>
+                <Image Name="Img"  Width="600" Height="500" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="500,150,0,200" Source="/Assets/rw.jpg"></Image>
 
 
-                <Button Style="{StaticResource ButtonStyle}" Content="Open"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="50,717,0,0" VerticalAlignment="Top" Width="208" Click="Open_Click"/>
-                <Button FontFamily="Segoe MDL2 Assets" Content="&#xE722;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="302,717,0,0" VerticalAlignment="Top" Width="208" Click="Launch_Camera"/>
-                <Button FontFamily="Segoe MDL2 Assets" Content="&#xE72C;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="562,717,0,0" VerticalAlignment="Top" Width="208" Click="Button_delete"/>
-                <Button FontFamily="Segoe MDL2 Assets" Content="&#xE74E;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="825,717,0,0" VerticalAlignment="Top" Width="208" Click="Save_Click"/>
-                <Button Content="Cut" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="50,146,0,0" VerticalAlignment="Top" Width="150" Click="Cut_Click"/>
-                <Button Content="Draw" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="330,146,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_Draw"/>
-                <Button Content="scrawl" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="50,281,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_scrawl"/>
-                <Button Content="AddFilter" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="330,281,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_afilter"/>
-                <Button Content="Blur" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="50,400,0,0" VerticalAlignment="Top" Width="150" Click="mohu_Click"/>
-                <Button Content="Paster" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="330,400,0,0" VerticalAlignment="Top" Width="150" Click="Paster_Click"/>
-                <Button  Content="light" Background="Gray"  Opacity="0.5"
-                    FontSize="36" HorizontalAlignment="left"  Height="75" Margin="330,500,0,0" VerticalAlignment="Top" Width="150"  
+                <Button Style="{StaticResource ButtonStyle}" 
+                        Content="Open"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="500,650,0,0" VerticalAlignment="Top" Width="200" Click="Open_Click"/>
+
+                <Button  Style="{StaticResource ButtonStyle}" FontFamily="Segoe MDL2 Assets" Content="&#xE72C;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="700,650,0,0" VerticalAlignment="Top" Width="200" Click="Button_delete"/>
+                <Button Style="{StaticResource ButtonStyle}" FontFamily="Segoe MDL2 Assets" Content="&#xE74E;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="900,650,0,0" VerticalAlignment="Top" Width="200" Click="Save_Click"/>
+                <Button  Background="Gray"
+                         Content="Cut" Opacity="0.5"  FontSize="24" HorizontalAlignment="Left" Height="75" Margin="50,150,0,0" VerticalAlignment="Top" Width="150" Click="Cut_Click"/>
+                <Button   Background="Gray"
+                          Content="Draw"  Opacity="0.5" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="200,150,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_Draw"/>
+                <Button Background="Gray"
+                        Content="Scrawl"   Opacity="0.5" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="50,225,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_scrawl"/>
+                <Button  Background="Gray"
+                         Content="AddFilter"  Opacity="0.5" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="200,225,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_afilter"/>
+                <Button  Background="Gray" Content="Blur"  Opacity="0.5"
+                        FontSize="24" HorizontalAlignment="Left" Height="75" Margin="50,300,0,0" VerticalAlignment="Top" Width="150" Click="mohu_Click"/>
+                <Button Background="Gray" Content="Paster"   Opacity="0.5" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="200,300,0,0" VerticalAlignment="Top" Width="150" Click="Paster_Click"/>
+                <Button   Background="Gray" FontFamily="Segoe MDL2 Assets" Content="&#xEA37;" Opacity="0.5"
+                    FontSize="36" HorizontalAlignment="left"  Height="75" Margin="200,375,0,0" VerticalAlignment="Top" Width="150"  
                     Click="Button_Clicknew"/>
+                <Button  Background="Gray"
+                         FontFamily="Segoe MDL2 Assets" Opacity="0.5"  Content="&#xE722;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="50,375,0,0" VerticalAlignment="Top" Width="150" Click="Launch_Camera"/>
 
                 <Frame Name="MyFrame">
 

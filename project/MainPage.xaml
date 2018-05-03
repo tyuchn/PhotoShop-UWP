@@ -6,8 +6,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources >
+        <ResourceDictionary>
+            <AcrylicBrush x:Key="Scenerybrush"
+                  BackgroundSource="HostBackdrop"
+                  TintOpacity="0.5"
+                  TintColor="Pink" 
+                  FallbackColor="White" 
+                  />
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid Background="{ThemeResource Scenerybrush}">
         <NavigationView Name="NavView" SelectionChanged="NavView_SelectionChanged">
             <NavigationView.MenuItems>
 

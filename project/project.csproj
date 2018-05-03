@@ -102,6 +102,7 @@
     <Compile Include="DrawingObjects\DoodleUI.cs" />
     <Compile Include="DrawingObjects\IDrawingUI.cs" />
     <Compile Include="DrawingObjects\TagUI.cs" />
+    <Compile Include="DrawingObjects\WallPaperUI.cs" />
     <Compile Include="food.xaml.cs">
       <DependentUpon>food.xaml</DependentUpon>
     </Compile>
@@ -113,6 +114,9 @@
     </Compile>
     <Compile Include="Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="paster.xaml.cs">
+      <DependentUpon>paster.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="scenery.xaml.cs">
@@ -152,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Dictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="draw.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -172,6 +180,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="paster.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="scenery.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -189,7 +201,15 @@
       <Version>1.21.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\OpenCVBridge\OpenCVBridge.vcxproj">
+      <Project>{74d727fa-7c35-41cb-ab13-fa4fcb1eb557}</Project>
+      <Name>OpenCVBridge</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

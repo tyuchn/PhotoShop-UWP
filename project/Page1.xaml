@@ -6,16 +6,29 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Key="BasicStyle" TargetType="ContentControl">
+            <Setter Property="Width" Value="130" />
+            <Setter Property="Height" Value="30" />
+        </Style>
+
+        <Style x:Key="ButtonStyle" TargetType="Button" 
+           BasedOn="{StaticResource BasicStyle}">
+            <Setter Property="BorderBrush" Value="Orange" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Foreground" Value="Red" />
+        </Style>
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ScrollViewer>
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
                 <TextBlock Name="TB" Text="处理界面" FontSize="48" HorizontalAlignment="Center"></TextBlock>
-                <Image Name="Img"  Width="500" Height="500" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="700,120,0,200"></Image>
+                <Image Name="Img"  Width="500" Height="500" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="700,120,0,200" Source="/Assets/rw.jpg"></Image>
 
 
-                <Button Content="Open"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="50,717,0,0" VerticalAlignment="Top" Width="208" Click="Open_Click"/>
+                <Button Style="{StaticResource ButtonStyle}" Content="Open"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="50,717,0,0" VerticalAlignment="Top" Width="208" Click="Open_Click"/>
                 <Button FontFamily="Segoe MDL2 Assets" Content="&#xE722;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="302,717,0,0" VerticalAlignment="Top" Width="208" Click="Launch_Camera"/>
                 <Button FontFamily="Segoe MDL2 Assets" Content="&#xE72C;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="562,717,0,0" VerticalAlignment="Top" Width="208" Click="Button_delete"/>
                 <Button FontFamily="Segoe MDL2 Assets" Content="&#xE74E;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="825,717,0,0" VerticalAlignment="Top" Width="208" Click="Save_Click"/>

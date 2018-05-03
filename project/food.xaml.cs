@@ -213,6 +213,47 @@ namespace project
 
         }
 
+
+
+        private async void Paster_Click(object sender, RoutedEventArgs e)
+        {
+            string desiredName = DateTime.Now.Ticks + ".jpg";
+            StorageFolder applicationFolder = ApplicationData.Current.LocalFolder;
+            StorageFolder folder = await applicationFolder.CreateFolderAsync("Pic", CreationCollisionOption.OpenIfExists);
+            StorageFile saveFile = await folder.CreateFileAsync(desiredName, CreationCollisionOption.OpenIfExists);
+            RenderTargetBitmap bitmap = new RenderTargetBitmap();
+            await bitmap.RenderAsync(Img);
+            var pixelBuffer = await bitmap.GetPixelsAsync();
+            using (var fileStream = await saveFile.OpenAsync(FileAccessMode.ReadWrite))
+            {
+                var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, fileStream);
+                encoder.SetPixelData(BitmapPixelFormat.Bgra8,
+                    BitmapAlphaMode.Ignore,
+                     (uint)bitmap.PixelWidth,
+                     (uint)bitmap.PixelHeight,
+                     DisplayInformation.GetForCurrentView().LogicalDpi,
+                     DisplayInformation.GetForCurrentView().LogicalDpi,
+                     pixelBuffer.ToArray());
+                await encoder.FlushAsync();
+            }
+
+
+
+            if (saveFile != null)
+            {
+                paster editor = new paster();
+                editor.Show(saveFile);
+
+                editor.ImageEditedCompleted += (image_edited) =>
+                {
+                    Img.Source = image_edited;
+                };
+
+            }
+
+        }
+
+
         private async void Button_Click_afilter(object sender, RoutedEventArgs e)
         {
 
@@ -350,10 +391,7 @@ namespace project
             Img.Source = bitmapSource;
         }
 
-        private void Button_delete(object sender, RoutedEventArgs e)
-        {
-            MyFrame.Navigate(typeof(Page1));
-        }
+    
     }
 }
 

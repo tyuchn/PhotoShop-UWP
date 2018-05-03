@@ -145,6 +145,9 @@
     <Content Include="Assets\05.png" />
     <Content Include="Assets\2.15.png" />
     <Content Include="Assets\fa.jpg" />
+    <Content Include="Assets\food.jpg" />
+    <Content Include="Assets\rw.jpg" />
+    <Content Include="Assets\sd.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

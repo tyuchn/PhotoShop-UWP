@@ -14,16 +14,18 @@
                 <TextBlock Name="TB" Text="处理界面" FontSize="48" HorizontalAlignment="Center"></TextBlock>
                 <Image Name="Img"  Width="500" Height="500" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="700,120,0,200"></Image>
 
+
                 <Button Content="Open"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="50,717,0,0" VerticalAlignment="Top" Width="208" Click="Open_Click"/>
                 <Button FontFamily="Segoe MDL2 Assets" Content="&#xE722;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="302,717,0,0" VerticalAlignment="Top" Width="208" Click="Launch_Camera"/>
                 <Button FontFamily="Segoe MDL2 Assets" Content="&#xE72C;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="562,717,0,0" VerticalAlignment="Top" Width="208" Click="Button_delete"/>
                 <Button FontFamily="Segoe MDL2 Assets" Content="&#xE74E;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="825,717,0,0" VerticalAlignment="Top" Width="208" Click="Save_Click"/>
-                <Button Content="Cut" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="20,146,0,0" VerticalAlignment="Top" Width="150" Click="Cut_Click"/>
-                <Button Content="Draw" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="300,146,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_Draw"/>
-                <Button Content="scrawl" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="20,281,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_scrawl"/>
-                <Button Content="AddFilter" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="300,281,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_afilter"/>
-                <Button Content="dim" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="20,400,0,0" VerticalAlignment="Top" Width="150" Click="mohu_Click"/>
-                 <Frame Name="MyFrame">
+                <Button Content="Cut" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="50,146,0,0" VerticalAlignment="Top" Width="150" Click="Cut_Click"/>
+                <Button Content="Draw" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="330,146,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_Draw"/>
+                <Button Content="scrawl" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="50,281,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_scrawl"/>
+                <Button Content="AddFilter" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="330,281,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_afilter"/>
+                <Button Content="Blur" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="50,400,0,0" VerticalAlignment="Top" Width="150" Click="mohu_Click"/>
+                <Button Content="Paster" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="330,400,0,0" VerticalAlignment="Top" Width="150" Click="Paster_Click"/>
+                <Frame Name="MyFrame">
 
                 </Frame>
 

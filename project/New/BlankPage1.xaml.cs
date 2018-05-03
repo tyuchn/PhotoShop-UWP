@@ -25,18 +25,18 @@ using Windows.Storage;
 using Microsoft.Graphics.Canvas.Effects;
 using System.Collections.ObjectModel;
 using Windows.Storage.Streams;
-using ImageEditor.DrawingObjects;
+
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
-namespace project
+namespace project.New
 {
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class scrawl : Page, INotifyPropertyChanged
-    {
+    public sealed partial class BlankPage1 : Page, INotifyPropertyChanged
 
+    {
         public event ImageEditedCompletedEventHandler ImageEditedCompleted;
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -47,13 +47,11 @@ namespace project
                 PropertyChanged(this, new PropertyChangedEventArgs(property_name));
             }
         }
-
-
         private ObservableCollection<string> _wallpapers = new ObservableCollection<string>();
 
         Border border = new Border();
         Popup popup = new Popup();
-        public scrawl()
+        public BlankPage1()
         {
             this.InitializeComponent();
             Loaded += ImageEditorControl_Loaded;
@@ -62,10 +60,6 @@ namespace project
         {
             SetCanvas();
         }
-
-        /// <summary>
-        /// 显示编辑器
-        /// </summary>
         private void Show()
         {
             var height = ApplicationView.GetForCurrentView().VisibleBounds.Height;
@@ -111,9 +105,11 @@ namespace project
             try
             {
                 Show();
+                WaitLoading.IsActive = true;
                 CanvasDevice cd = CanvasDevice.GetSharedDevice();
                 var stream = await image.OpenAsync(FileAccessMode.Read);
                 _image = await CanvasBitmap.LoadAsync(cd, stream);
+                WaitLoading.IsActive = false;
                 MyCanvas.Invalidate();
             }
             catch
@@ -158,26 +154,14 @@ namespace project
                 args.DrawingSession.DrawImage(target);
             }
         }
-
-
-
         private void OKBtn_Tapped(object sender, TappedRoutedEventArgs e)
         {
             GenerateResultImage();
         }
-
-
         private Color _back_color = Colors.White;   //画布背景色
         private Stretch _stretch = Stretch.Uniform;  //底图图片填充方式
         private int _size_mode = 2;  //画布长宽比  
-        private int _pen_size = 2;   //涂鸦画笔粗细
-        private Color _pen_color = Colors.Orange;  //涂鸦画笔颜色
-        private DoodleUI _current_editing_doodleUI;  //当前涂鸦对象
         private CanvasBitmap _image;  //底图
-        Stack<IDrawingUI> _doodleUIs = new Stack<IDrawingUI>();  //涂鸦
-
-
-
         private CanvasRenderTarget GetDrawings(bool edit)
         {
             double w, h;  //画布大小
@@ -202,37 +186,11 @@ namespace project
                 graphics.Clear(_back_color);
 
                 DrawBackImage(graphics, scale);
-                //绘制涂鸦
-                if (_doodleUIs != null && _doodleUIs.Count > 0)
-                {
-                    var list = _doodleUIs.ToList(); list.Reverse();
-                    list.ForEach((d) => { d.Draw(graphics, (float)scale); });
-                }
-                if (_current_editing_doodleUI != null)
-                {
-                    _current_editing_doodleUI.Draw(graphics, (float)scale); //正在涂鸦对象 在上面
-                }
+
 
             }
 
             return target;
-        }
-
-
-        private void DrawBackImage(CanvasDrawingSession graphics, double scale)
-        {
-            if (_image != null)
-            {
-                Rect des = GetImageDrawingRect();
-                des.X *= scale;
-                des.Y *= scale;
-                des.Width *= scale;
-                des.Height *= scale;
-
-                ICanvasImage image = GetBrightnessEffect(_image);
-
-                graphics.DrawImage(image, des, _image.Bounds);
-            }
         }
         private void SetCanvas()
         {
@@ -291,18 +249,59 @@ namespace project
             }
             MyCanvas.Invalidate();
         }
+        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            MyCanvas.Invalidate();
+        }
+        private void DrawBackImage(CanvasDrawingSession graphics, double scale)
+        {
+            if (_image != null)
+            {
+                Rect des = GetImageDrawingRect();
+                des.X *= scale;
+                des.Y *= scale;
+                des.Width *= scale;
+                des.Height *= scale;
 
+                //亮度
+                ICanvasImage image = GetBrightnessEffect(_image);
+                //锐化
+                image = GetSharpenEffect(image);
+                //模糊
+                image = GetBlurEffect(image);
+                graphics.DrawImage(image, des, _image.Bounds);
+            }
+        }
         private ICanvasImage GetBrightnessEffect(ICanvasImage source)
         {
+            var t = Slider1.Value / 500 * 2;
             var exposureEffect = new ExposureEffect
             {
                 Source = source,
-
+                Exposure = (float)t
             };
 
             return exposureEffect;
         }
-
+        private ICanvasImage GetBlurEffect(ICanvasImage source)
+        {
+            var t = Slider3.Value / 100 * 12;
+            var blurEffect = new GaussianBlurEffect
+            {
+                Source = source,
+                BlurAmount = (float)t
+            };
+            return blurEffect;
+        }
+        private ICanvasImage GetSharpenEffect(ICanvasImage source)
+        {
+            var sharpenEffect = new SharpenEffect
+            {
+                Source = source,
+                Amount = (float)(Slider2.Value * 0.1)
+            };
+            return sharpenEffect;
+        }
         private async void GenerateResultImage()
         {
             var img = GetDrawings(false);
@@ -376,129 +375,9 @@ namespace project
             }
             return des;
         }
-
-
-
-        /// <summary>
-        /// 操作画布开始
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MyCanvas_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
-        {
-
-            if (_current_editing_doodleUI == null)
-            {
-                _current_editing_doodleUI = new DoodleUI() { DrawingColor = _pen_color, DrawingSize = _pen_size };
-                _current_editing_doodleUI.InitImageBrush();  //可能是图片图片画刷  需要提前初始化
-            }
-
-
-
-        }
-
-
-        /// <summary>
-        /// 操作画布结束
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MyCanvas_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
-        {
-
-            if (_current_editing_doodleUI != null)
-            {
-                _doodleUIs.Push(_current_editing_doodleUI);
-                _current_editing_doodleUI = null;
-                MyCanvas.Invalidate();
-            }
-
-
-
-        }
-
-        /// <summary>
-        /// 操作画布进行时
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MyCanvas_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
-        {
-
-            if (_current_editing_doodleUI != null)
-            {
-                _current_editing_doodleUI.Points.Add(e.Position);
-                MyCanvas.Invalidate();
-            }
-        }
-
-
-
-        /// <summary>
-        /// 选择涂鸦画笔粗细
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void PenSize_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            var pen_size = sender as Border;
-            List<Border> l = new List<Border> { PenSize1, PenSize2, PenSize3 };
-
-            l.ForEach((b) => { (b as Border).Child.Visibility = Visibility.Collapsed; }); //不选中状态
-
-            pen_size.Child.Visibility = Visibility.Visible; //选中
-
-            _pen_size = int.Parse(pen_size.Tag.ToString());
-        }
-        /// <summary>
-        /// 选择涂鸦画笔颜色
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void PenColor_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            var pen_color = sender as Border;
-
-            List<Border> l = new List<Border> { PenColor1, PenColor2, PenColor3, PenColor4, PenColor5 };
-            l.ForEach((b) => { b.Child.Visibility = Visibility.Collapsed; });
-
-            pen_color.Child.Visibility = Visibility.Visible;
-
-            if (pen_color.Background is ImageBrush)  //图片刷子
-            {
-                _pen_color = Colors.Transparent;
-                PenSize1.Background = PenSize2.Background = PenSize3.Background = pen_color.Background;
-            }
-            else
-            {
-                _pen_color = (pen_color.Background as SolidColorBrush).Color;
-                PenSize1.Background = PenSize2.Background = PenSize3.Background = new SolidColorBrush(_pen_color);
-            }
-        }
-
-
-        /// <summary>
-        /// 涂鸦撤销
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SymbolIcon_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (_doodleUIs != null && _doodleUIs.Count > 0)
-            {
-                _doodleUIs.Pop();  //删除最近一次涂鸦 立即重绘
-                MyCanvas.Invalidate();
-            }
-        }
-
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
             GenerateResultImage();
         }
-
-
-
     }
-
-    public delegate void ImageEditedCompletedEventHandler(BitmapImage image);
 }

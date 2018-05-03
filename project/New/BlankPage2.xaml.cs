@@ -47,10 +47,10 @@ namespace project.New
                 PropertyChanged(this, new PropertyChangedEventArgs(property_name));
             }
         }
-       
+
 
         private ObservableCollection<string> _wallpapers = new ObservableCollection<string>();
-        
+
         Border border = new Border();
         Popup popup = new Popup();
         public BlankPage2()
@@ -83,8 +83,8 @@ namespace project.New
                 border.Width = width;
                 border.Height = height;
 
-                this.Height = height*0.8;
-                this.Width = this.Height*1.6;
+                this.Height = height * 0.8;
+                this.Width = this.Height * 1.6;
             }
 
             SetCanvas();
@@ -138,8 +138,8 @@ namespace project.New
                 border.Width = width;
                 border.Height = height;
 
-                this.Height = height *0.8 ;
-                this.Width = this.Height *1.6 ;
+                this.Height = height * 0.8;
+                this.Width = this.Height * 1.6;
             }
             SetCanvas();
             MyCanvas.Invalidate();
@@ -194,7 +194,7 @@ namespace project.New
             MainCommandPanel.SelectedIndex = selected;
         }
 
-        
+
         private void Filters_ItemClick(object sender, ItemClickEventArgs e)
         {
             foreach (var item in Filters.Items)
@@ -241,7 +241,7 @@ namespace project.New
                 w = MyCanvas.ActualWidth;
                 h = MyCanvas.ActualHeight;
             }
-            else 
+            else
             {
                 Rect des = GetImageDrawingRect();
 
@@ -255,9 +255,9 @@ namespace project.New
             using (CanvasDrawingSession graphics = target.CreateDrawingSession())
             {
                 graphics.Clear(_back_color);
-                
+
                 DrawBackImage(graphics, scale);
-         
+
 
             }
 
@@ -329,9 +329,9 @@ namespace project.New
                 des.Y *= scale;
                 des.Width *= scale;
                 des.Height *= scale;
-                
+
                 ICanvasImage image = GetBrightnessEffect(_image);
-                
+
 
 
                 //应用滤镜模板
@@ -350,7 +350,7 @@ namespace project.New
 
             return exposureEffect;
         }
-        
+
         private async void GenerateResultImage()
         {
             var img = GetDrawings(false);
@@ -380,8 +380,8 @@ namespace project.New
 
             if (_stretch == Stretch.Uniform)
             {
-                var w = MyCanvas.Width-10;
-                var h = MyCanvas.Height-10;
+                var w = MyCanvas.Width - 10;
+                var h = MyCanvas.Height - 10;
                 if (image_w / image_h > w / h)
                 {
                     var left = 10;
@@ -426,7 +426,7 @@ namespace project.New
         }
         #endregion
 
-     
+
         private ICanvasImage ApplyFilterTemplate(ICanvasImage source)
         {
             if (_filter_index == 0)  //无滤镜
@@ -467,7 +467,7 @@ namespace project.New
 
                 return temperatureAndTintEffect;
             }
-           
+
             else if (_filter_index == 5) //雕刻
             {
                 var embossEffect = new EmbossEffect
@@ -478,7 +478,7 @@ namespace project.New
                 embossEffect.Angle = 0;
                 return embossEffect;
             }
-           
+
             else
             {
                 return source;

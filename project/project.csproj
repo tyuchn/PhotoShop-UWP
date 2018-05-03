@@ -102,17 +102,24 @@
     <Compile Include="DrawingObjects\DoodleUI.cs" />
     <Compile Include="DrawingObjects\IDrawingUI.cs" />
     <Compile Include="DrawingObjects\TagUI.cs" />
+    <Compile Include="DrawingObjects\WallPaperUI.cs" />
     <Compile Include="food.xaml.cs">
       <DependentUpon>food.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="New\BlankPage1.xaml.cs">
+      <DependentUpon>BlankPage1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="New\BlankPage2.xaml.cs">
       <DependentUpon>BlankPage2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="paster.xaml.cs">
+      <DependentUpon>paster.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="scenery.xaml.cs">
@@ -168,11 +175,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="New\BlankPage1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="New\BlankPage2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Page1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="paster.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -24,7 +24,7 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
-        </Grid.RowDefinitions> 
+        </Grid.RowDefinitions>
         <TextBlock  Grid.Row="0"
                     FontSize="48"
                     HorizontalAlignment="Center">ADD FILTER</TextBlock>

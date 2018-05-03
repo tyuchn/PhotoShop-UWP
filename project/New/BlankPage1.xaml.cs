@@ -34,7 +34,7 @@ namespace project.New
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class BlankPage2 : Page, INotifyPropertyChanged
+    public sealed partial class BlankPage1 : Page, INotifyPropertyChanged
 
     {
         public event ImageEditedCompletedEventHandler ImageEditedCompleted;
@@ -47,13 +47,11 @@ namespace project.New
                 PropertyChanged(this, new PropertyChangedEventArgs(property_name));
             }
         }
-
-
         private ObservableCollection<string> _wallpapers = new ObservableCollection<string>();
 
         Border border = new Border();
         Popup popup = new Popup();
-        public BlankPage2()
+        public BlankPage1()
         {
             this.InitializeComponent();
             Loaded += ImageEditorControl_Loaded;
@@ -62,10 +60,6 @@ namespace project.New
         {
             SetCanvas();
         }
-
-        /// <summary>
-        /// 显示编辑器
-        /// </summary>
         private void Show()
         {
             var height = ApplicationView.GetForCurrentView().VisibleBounds.Height;
@@ -160,79 +154,14 @@ namespace project.New
                 args.DrawingSession.DrawImage(target);
             }
         }
-        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selected = (sender as Pivot).SelectedIndex;
-            RelativePanel tab = null;
-            switch (selected)
-            {
-                case 0:
-                    {
-                        tab = tab0;
-                        break;
-                    }
-            }
-            List<RelativePanel> l = new List<RelativePanel> { tab0 };
-            foreach (RelativePanel t in l)
-            {
-                (t.Children[0] as TextBlock).Foreground = new SolidColorBrush(Colors.White);
-                (t.Children[1] as Rectangle).Fill = new SolidColorBrush(Colors.White);
-            }
-            (tab.Children[0] as TextBlock).Foreground = new SolidColorBrush(Colors.Black);
-            (tab.Children[1] as Rectangle).Fill = new SolidColorBrush(Colors.Black);
-        }
-        /// <summary>
-        /// 点击tab
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void tab_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            List<RelativePanel> tabs = new List<RelativePanel> { tab0 };
-            int selected = tabs.IndexOf(sender as RelativePanel);
-
-            MainCommandPanel.SelectedIndex = selected;
-        }
-
-
-        private void Filters_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            foreach (var item in Filters.Items)
-            {
-                (((item as GridViewItem).Content as StackPanel).Children[1] as Border).Background = new SolidColorBrush(Colors.Pink);
-                ((((item as GridViewItem).Content as StackPanel).Children[1] as Border).Child as TextBlock).Foreground = new SolidColorBrush(Colors.Black);
-            }
-            ((e.ClickedItem as StackPanel).Children[1] as Border).Background = new SolidColorBrush(Colors.Pink);
-            (((e.ClickedItem as StackPanel).Children[1] as Border).Child as TextBlock).Foreground = new SolidColorBrush(Colors.DeepPink);
-
-            _filter_index = int.Parse((e.ClickedItem as StackPanel).Tag.ToString());
-
-            MyCanvas.Invalidate();
-        }
-
-        private void CancelBtn_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (popup != null)
-            {
-                popup.IsOpen = false;
-            }
-        }
-
         private void OKBtn_Tapped(object sender, TappedRoutedEventArgs e)
         {
             GenerateResultImage();
         }
-
-        #region fields
         private Color _back_color = Colors.White;   //画布背景色
         private Stretch _stretch = Stretch.Uniform;  //底图图片填充方式
         private int _size_mode = 2;  //画布长宽比  
-        private Color _pen_color = Colors.Orange;  //涂鸦画笔颜色
         private CanvasBitmap _image;  //底图
-        private int _filter_index = 0;  //滤镜
-
-
-
         private CanvasRenderTarget GetDrawings(bool edit)
         {
             double w, h;  //画布大小
@@ -320,6 +249,10 @@ namespace project.New
             }
             MyCanvas.Invalidate();
         }
+        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            MyCanvas.Invalidate();
+        }
         private void DrawBackImage(CanvasDrawingSession graphics, double scale)
         {
             if (_image != null)
@@ -330,27 +263,45 @@ namespace project.New
                 des.Width *= scale;
                 des.Height *= scale;
 
+                //亮度
                 ICanvasImage image = GetBrightnessEffect(_image);
-
-
-
-                //应用滤镜模板
-                image = ApplyFilterTemplate(image);
-
+                //锐化
+                image = GetSharpenEffect(image);
+                //模糊
+                image = GetBlurEffect(image);
                 graphics.DrawImage(image, des, _image.Bounds);
             }
         }
         private ICanvasImage GetBrightnessEffect(ICanvasImage source)
         {
+            var t = Slider1.Value / 500 * 2;
             var exposureEffect = new ExposureEffect
             {
                 Source = source,
-
+                Exposure = (float)t
             };
 
             return exposureEffect;
         }
-
+        private ICanvasImage GetBlurEffect(ICanvasImage source)
+        {
+            var t = Slider3.Value / 100 * 12;
+            var blurEffect = new GaussianBlurEffect
+            {
+                Source = source,
+                BlurAmount = (float)t
+            };
+            return blurEffect;
+        }
+        private ICanvasImage GetSharpenEffect(ICanvasImage source)
+        {
+            var sharpenEffect = new SharpenEffect
+            {
+                Source = source,
+                Amount = (float)(Slider2.Value * 0.1)
+            };
+            return sharpenEffect;
+        }
         private async void GenerateResultImage()
         {
             var img = GetDrawings(false);
@@ -424,73 +375,9 @@ namespace project.New
             }
             return des;
         }
-        #endregion
-
-
-        private ICanvasImage ApplyFilterTemplate(ICanvasImage source)
-        {
-            if (_filter_index == 0)  //无滤镜
-            {
-                return source;
-            }
-            else if (_filter_index == 3)  // 黑白
-            {
-                return new GrayscaleEffect
-                {
-                    Source = source
-                };
-            }
-            else if (_filter_index == 1)  //反色
-            {
-                return new InvertEffect
-                {
-                    Source = source
-                };
-            }
-            else if (_filter_index == 2) //冷淡
-            {
-                var hueRotationEffect = new HueRotationEffect
-                {
-                    Source = source,
-                    Angle = 0.5f
-                };
-                return hueRotationEffect;
-            }
-            else if (_filter_index == 4)  //美食
-            {
-                var temperatureAndTintEffect = new TemperatureAndTintEffect
-                {
-                    Source = source
-                };
-                temperatureAndTintEffect.Temperature = 0.6f;
-                temperatureAndTintEffect.Tint = 0.6f;
-
-                return temperatureAndTintEffect;
-            }
-
-            else if (_filter_index == 5) //雕刻
-            {
-                var embossEffect = new EmbossEffect
-                {
-                    Source = source
-                };
-                embossEffect.Amount = 5;
-                embossEffect.Angle = 0;
-                return embossEffect;
-            }
-
-            else
-            {
-                return source;
-            }
-        }
-
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
             GenerateResultImage();
         }
     }
-
-    public delegate void ImageEditedCompletedEventHandler(BitmapImage image);
 }
-  

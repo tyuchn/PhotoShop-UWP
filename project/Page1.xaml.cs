@@ -53,16 +53,55 @@ namespace project
             //选取单个文件  
             Windows.Storage.StorageFile file = await openPicker.PickSingleFileAsync();
 
-            //var inputFile = await openPicker.PickSingleFileAsync();
 
-            if (file == null)
+
+
+            if (file != null)
+            {
+                using (IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.Read))
+                {
+                    var srcImage = new BitmapImage();
+                    await srcImage.SetSourceAsync(stream);
+                    Img.Source = srcImage;
+                }
+            }
+
+        }
+
+        private async void mohu_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            string desiredName = DateTime.Now.Ticks + ".jpg";
+            StorageFolder applicationFolder = ApplicationData.Current.LocalFolder;
+            StorageFolder folder = await applicationFolder.CreateFolderAsync("Pic", CreationCollisionOption.OpenIfExists);
+            StorageFile saveFile = await folder.CreateFileAsync(desiredName, CreationCollisionOption.OpenIfExists);
+            RenderTargetBitmap bitmap = new RenderTargetBitmap();
+            await bitmap.RenderAsync(Img);
+            var pixelBuffer = await bitmap.GetPixelsAsync();
+            using (var fileStream = await saveFile.OpenAsync(FileAccessMode.ReadWrite))
+            {
+                var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, fileStream);
+                encoder.SetPixelData(BitmapPixelFormat.Bgra8,
+                    BitmapAlphaMode.Ignore,
+                     (uint)bitmap.PixelWidth,
+                     (uint)bitmap.PixelHeight,
+                     DisplayInformation.GetForCurrentView().LogicalDpi,
+                     DisplayInformation.GetForCurrentView().LogicalDpi,
+                     pixelBuffer.ToArray());
+                await encoder.FlushAsync();
+            }
+
+
+            if (saveFile == null)
             {
                 // The user cancelled the picking operation
                 return;
             }
 
+
             SoftwareBitmap inputBitmap;
-            using (IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.Read))
+            using (IRandomAccessStream stream = await saveFile.OpenAsync(FileAccessMode.Read))
             {
                 // Create the decoder from the stream
                 BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
@@ -93,32 +132,77 @@ namespace project
         {
             Frame.Navigate(typeof(draw));
         }
+
+
         private async void Cut_Click(object sender, RoutedEventArgs e)
         {
-            //文件选择器  
-            FileOpenPicker openPicker = new FileOpenPicker();
-            //初始位置  
-            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            //添加文件类型  
-            openPicker.FileTypeFilter.Add(".jpg");
-            openPicker.FileTypeFilter.Add(".jpeg");
-            openPicker.FileTypeFilter.Add(".png");
-            openPicker.FileTypeFilter.Add(".gif");
-            //选取单个文件  
-            Windows.Storage.StorageFile file = await openPicker.PickSingleFileAsync();
-
-
-
-
-            if (file != null)
+            string desiredName = DateTime.Now.Ticks + ".jpg";
+            StorageFolder applicationFolder = ApplicationData.Current.LocalFolder;
+            StorageFolder folder = await applicationFolder.CreateFolderAsync("Pic", CreationCollisionOption.OpenIfExists);
+            StorageFile saveFile = await folder.CreateFileAsync(desiredName, CreationCollisionOption.OpenIfExists);
+            RenderTargetBitmap bitmap = new RenderTargetBitmap();
+            await bitmap.RenderAsync(Img);
+            var pixelBuffer = await bitmap.GetPixelsAsync();
+            using (var fileStream = await saveFile.OpenAsync(FileAccessMode.ReadWrite))
             {
-                CutPicture(file);
+                var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, fileStream);
+                encoder.SetPixelData(BitmapPixelFormat.Bgra8,
+                    BitmapAlphaMode.Ignore,
+                     (uint)bitmap.PixelWidth,
+                     (uint)bitmap.PixelHeight,
+                     DisplayInformation.GetForCurrentView().LogicalDpi,
+                     DisplayInformation.GetForCurrentView().LogicalDpi,
+                     pixelBuffer.ToArray());
+                await encoder.FlushAsync();
+            }
+
+
+
+            if (saveFile != null)
+            {
+                CutPicture(saveFile);
 
             }
 
         }
 
+        private async void Paster_Click(object sender, RoutedEventArgs e)
+        {
+            string desiredName = DateTime.Now.Ticks + ".jpg";
+            StorageFolder applicationFolder = ApplicationData.Current.LocalFolder;
+            StorageFolder folder = await applicationFolder.CreateFolderAsync("Pic", CreationCollisionOption.OpenIfExists);
+            StorageFile saveFile = await folder.CreateFileAsync(desiredName, CreationCollisionOption.OpenIfExists);
+            RenderTargetBitmap bitmap = new RenderTargetBitmap();
+            await bitmap.RenderAsync(Img);
+            var pixelBuffer = await bitmap.GetPixelsAsync();
+            using (var fileStream = await saveFile.OpenAsync(FileAccessMode.ReadWrite))
+            {
+                var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, fileStream);
+                encoder.SetPixelData(BitmapPixelFormat.Bgra8,
+                    BitmapAlphaMode.Ignore,
+                     (uint)bitmap.PixelWidth,
+                     (uint)bitmap.PixelHeight,
+                     DisplayInformation.GetForCurrentView().LogicalDpi,
+                     DisplayInformation.GetForCurrentView().LogicalDpi,
+                     pixelBuffer.ToArray());
+                await encoder.FlushAsync();
+            }
 
+
+
+            if (saveFile != null)
+            {
+                paster editor = new paster();
+                editor.Show(saveFile);
+
+                editor.ImageEditedCompleted += (image_edited) =>
+                {
+                    Img.Source = image_edited;
+                };
+
+            }
+
+        }
 
         private async void CutPicture(StorageFile file)
         {
@@ -167,16 +251,31 @@ namespace project
 
         private async void Button_Click_afilter(object sender, RoutedEventArgs e)
         {
-            FileOpenPicker fo = new FileOpenPicker();
-            fo.FileTypeFilter.Add(".png");
-            fo.FileTypeFilter.Add(".jpg");
-            fo.SuggestedStartLocation = PickerLocationId.Desktop;
 
-            var f = await fo.PickSingleFileAsync();
-            if (f != null)
+            string desiredName = DateTime.Now.Ticks + ".jpg";
+            StorageFolder applicationFolder = ApplicationData.Current.LocalFolder;
+            StorageFolder folder = await applicationFolder.CreateFolderAsync("Pic", CreationCollisionOption.OpenIfExists);
+            StorageFile saveFile = await folder.CreateFileAsync(desiredName, CreationCollisionOption.OpenIfExists);
+            RenderTargetBitmap bitmap = new RenderTargetBitmap();
+            await bitmap.RenderAsync(Img);
+            var pixelBuffer = await bitmap.GetPixelsAsync();
+            using (var fileStream = await saveFile.OpenAsync(FileAccessMode.ReadWrite))
+            {
+                var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, fileStream);
+                encoder.SetPixelData(BitmapPixelFormat.Bgra8,
+                    BitmapAlphaMode.Ignore,
+                     (uint)bitmap.PixelWidth,
+                     (uint)bitmap.PixelHeight,
+                     DisplayInformation.GetForCurrentView().LogicalDpi,
+                     DisplayInformation.GetForCurrentView().LogicalDpi,
+                     pixelBuffer.ToArray());
+                await encoder.FlushAsync();
+            }
+
+            if (saveFile != null)
             {
                 BlankPage2 editor = new BlankPage2();
-                editor.Show(f);
+                editor.Show(saveFile);
 
                 editor.ImageEditedCompleted += (image_edited) =>
                 {
@@ -186,16 +285,30 @@ namespace project
         }
         private async void Button_Click_scrawl(object sender, RoutedEventArgs e)
         {
-            FileOpenPicker fo = new FileOpenPicker();
-            fo.FileTypeFilter.Add(".png");
-            fo.FileTypeFilter.Add(".jpg");
-            fo.SuggestedStartLocation = PickerLocationId.Desktop;
+            string desiredName = DateTime.Now.Ticks + ".jpg";
+            StorageFolder applicationFolder = ApplicationData.Current.LocalFolder;
+            StorageFolder folder = await applicationFolder.CreateFolderAsync("Pic", CreationCollisionOption.OpenIfExists);
+            StorageFile saveFile = await folder.CreateFileAsync(desiredName, CreationCollisionOption.OpenIfExists);
+            RenderTargetBitmap bitmap = new RenderTargetBitmap();
+            await bitmap.RenderAsync(Img);
+            var pixelBuffer = await bitmap.GetPixelsAsync();
+            using (var fileStream = await saveFile.OpenAsync(FileAccessMode.ReadWrite))
+            {
+                var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, fileStream);
+                encoder.SetPixelData(BitmapPixelFormat.Bgra8,
+                    BitmapAlphaMode.Ignore,
+                     (uint)bitmap.PixelWidth,
+                     (uint)bitmap.PixelHeight,
+                     DisplayInformation.GetForCurrentView().LogicalDpi,
+                     DisplayInformation.GetForCurrentView().LogicalDpi,
+                     pixelBuffer.ToArray());
+                await encoder.FlushAsync();
+            }
 
-            var f = await fo.PickSingleFileAsync();
-            if (f != null)
+            if (saveFile != null)
             {
                 scrawl editor = new scrawl();
-                editor.Show(f);
+                editor.Show(saveFile);
 
                 editor.ImageEditedCompleted += (image_edited) =>
                 {
@@ -244,7 +357,7 @@ namespace project
                 }
             }
         }
-        
+
 
         private async void Launch_Camera(object sender, RoutedEventArgs e)
         {
@@ -264,8 +377,8 @@ namespace project
             BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
             SoftwareBitmap softwareBitmap = await decoder.GetSoftwareBitmapAsync();
             SoftwareBitmap softwareBitmapBGR8 = SoftwareBitmap.Convert(softwareBitmap,
-        BitmapPixelFormat.Bgra8,
-        BitmapAlphaMode.Premultiplied);
+            BitmapPixelFormat.Bgra8,
+            BitmapAlphaMode.Premultiplied);
 
             SoftwareBitmapSource bitmapSource = new SoftwareBitmapSource();
             await bitmapSource.SetBitmapAsync(softwareBitmapBGR8);
@@ -276,27 +389,6 @@ namespace project
         private void Button_delete(object sender, RoutedEventArgs e)
         {
             MyFrame.Navigate(typeof(Page1));
-        }
-
-
-        private async void Paster_Click(object sender, RoutedEventArgs e)
-        {
-            FileOpenPicker fo = new FileOpenPicker();
-            fo.FileTypeFilter.Add(".png");
-            fo.FileTypeFilter.Add(".jpg");
-            fo.SuggestedStartLocation = PickerLocationId.Desktop;
-
-            var f = await fo.PickSingleFileAsync();
-            if (f != null)
-            {
-                paster editor = new paster();
-                editor.Show(f);
-
-                editor.ImageEditedCompleted += (image_edited) =>
-                {
-                    Img.Source = image_edited;
-                };
-            }
         }
     }
 }

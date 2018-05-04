@@ -12,7 +12,7 @@
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
                 <TextBlock Name="TB" Text="处理界面" FontSize="48" HorizontalAlignment="Center"></TextBlock>
-                <Image Name="Img"  Width="500" Height="500" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="700,120,0,200"></Image>
+                <Image Name="Img"  Width="500" Height="500" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="697,89,0,411"></Image>
 
 
                 <Button Content="Open"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="50,717,0,0" VerticalAlignment="Top" Width="208" Click="Open_Click"/>
@@ -23,8 +23,8 @@
                 <Button Content="Draw" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="330,146,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_Draw"/>
                 <Button Content="scrawl" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="50,281,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_scrawl"/>
                 <Button Content="AddFilter" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="330,281,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_afilter"/>
-                <Button Content="Blur" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="50,400,0,0" VerticalAlignment="Top" Width="150" Click="mohu_Click"/>
-                <Button Content="Paster" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="330,400,0,0" VerticalAlignment="Top" Width="150" Click="Paster_Click"/>
+                <Button Content="Blur" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="50,417,0,0" VerticalAlignment="Top" Width="150" Click="mohu_Click"/>
+                <Button Content="Paster" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="330,417,0,0" VerticalAlignment="Top" Width="150" Click="Paster_Click"/>
                 <Frame Name="MyFrame">
 
                 </Frame>

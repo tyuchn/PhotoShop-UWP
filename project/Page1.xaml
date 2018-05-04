@@ -33,62 +33,79 @@
         <ScrollViewer>
             <Grid Background="{ThemeResource Scenerybrush}">
 
-                <TextBlock Name="TB" Text="Portrait" FontSize="48" HorizontalAlignment="Center"></TextBlock>
-                <Image Name="Img"  Width="600" Height="500" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="500,150,0,200" Source="/Assets/rw.jpg"></Image>
-
-
-                <Button Style="{StaticResource ButtonStyle}" 
-                        Content="Open"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="500,650,0,0" VerticalAlignment="Top" Width="200" Click="Open_Click"/>
-
-                <Button Style="{StaticResource ButtonStyle}" FontFamily="Segoe MDL2 Assets" Content="&#xE72C;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="700,650,0,0" VerticalAlignment="Top" Width="200" Click="Button_delete"/>
-                <Button Style="{StaticResource ButtonStyle}" FontFamily="Segoe MDL2 Assets" Content="&#xE74E;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="900,650,0,0" VerticalAlignment="Top" Width="200" Click="Save_Click"/>
-                <Button   Background="Gray" FontFamily="Segoe MDL2 Assets" Content="&#xEA37;" Opacity="0.5"
-                    FontSize="36" HorizontalAlignment="left"  Height="75" Margin="200,375,0,0" VerticalAlignment="Top" Width="150"  
-                    Click="Button_Clicknew"/>
-                <Button  Background="Gray"
-                         FontFamily="Segoe MDL2 Assets" Opacity="0.5"  Content="&#xE722;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="50,375,0,0" VerticalAlignment="Top" Width="150" Click="Launch_Camera"/>
-                <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click"/>
+                <Image Name="Img"  Width="1168" Height="690" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="64,70,0,0" Source="/Assets/57278415624ba751c405cd498f3e0327.jpg"></Image>
+                <Button Content="EDIT" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1281,0,0,0" Click="Button_Click" Width="209" Height="60"/>
                 <Frame Name="MyFrame">
-                    <SplitView Name="MySplit" HorizontalAlignment="Left" Height="693" Margin="1281,91,0,0" VerticalAlignment="Top" Width="219">
+                    <SplitView Name="MySplit" HorizontalAlignment="Left" Height="924" Margin="1281,60,0,0" VerticalAlignment="Top" Width="219">
                         <SplitView.Pane>
                             <StackPanel Orientation="Vertical">
                                 <ListBox Name="Options" SelectionChanged="Options_changed" SelectionMode="Single">
-                                    <ListBoxItem Name="Cut">
+                                    <ListBoxItem Name="open">
                                         <StackPanel Orientation="Horizontal">
                                             <SymbolIcon Symbol="Add" Foreground="Gray"/>
+                                            <TextBlock  Text="Open" Margin="24,0"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+                                    <ListBoxItem Name="Cut">
+                                        <StackPanel Orientation="Horizontal">
+                                            <SymbolIcon Symbol="Cut" Foreground="Gray"/>
                                             <TextBlock  Text="Cut" Margin="24,0"/>
                                         </StackPanel>
                                     </ListBoxItem>
                                     <ListBoxItem Name="scrawl">
                                         <StackPanel Orientation="Horizontal">
-                                            <SymbolIcon Symbol="Add" Foreground="Gray"/>
+                                            <SymbolIcon Symbol="Highlight" Foreground="Gray"/>
                                             <TextBlock  Text="Scrawl" Margin="24,0"/>
                                         </StackPanel>
                                     </ListBoxItem>
                                     <ListBoxItem Name="blur">
                                         <StackPanel Orientation="Horizontal">
-                                            <SymbolIcon Symbol="Add" Foreground="Gray"/>
+                                            <SymbolIcon Symbol="Favorite" Foreground="Gray"/>
                                             <TextBlock  Text="Blur" Margin="24,0"/>
                                         </StackPanel>
                                     </ListBoxItem>
                                     <ListBoxItem Name="addfilter">
                                         <StackPanel Orientation="Horizontal">
-                                            <SymbolIcon Symbol="Add" Foreground="Gray"/>
+                                            <SymbolIcon Symbol="View" Foreground="Gray"/>
                                             <TextBlock  Text="AddFilter" Margin="24,0"/>
                                         </StackPanel>
                                     </ListBoxItem>
                                     <ListBoxItem Name="paster">
                                         <StackPanel Orientation="Horizontal">
-                                            <SymbolIcon Symbol="Add" Foreground="Gray"/>
+                                            <SymbolIcon Symbol="Emoji" Foreground="Gray"/>
                                             <TextBlock  Text="Paster" Margin="24,0"/>
                                         </StackPanel>
                                     </ListBoxItem>
+                                    <ListBoxItem Name="regenerate">
+                                        <StackPanel Orientation="Horizontal">
+                                            <SymbolIcon Symbol="Refresh" Foreground="Gray"/>
+                                            <TextBlock  Text="Regenerate" Margin="24,0"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+                                    <ListBoxItem Name="Camera">
+                                        <StackPanel Orientation="Horizontal">
+                                            <SymbolIcon Symbol="Camera" Foreground="Gray"/>
+                                            <TextBlock  Text="Camera" Margin="24,0"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+                                    <ListBoxItem Name="Sharpen" >
+                                        <StackPanel Orientation="Horizontal">
+                                            <SymbolIcon Symbol="AlignLeft" Foreground="Gray"/>
+                                            <TextBlock  Text="Ruihua" Margin="24,0"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+                                    <ListBoxItem Name="save">
+                                        <StackPanel Orientation="Horizontal">
+                                            <SymbolIcon  Symbol="Save" Foreground="Gray"/>
+                                            <TextBlock  Text="Save" Margin="24,0"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
                                 </ListBox>
-                            <Grid/>
+                                <Grid/>
                             </StackPanel>
                         </SplitView.Pane>
                         <Grid>
-                           
+
                         </Grid>
                     </SplitView>
                 </Frame>

@@ -37,43 +37,14 @@ namespace project
         {
             this.InitializeComponent();
         }
-        private async void Open_Click(object sender, RoutedEventArgs e)
-        {
-
-
-            //文件选择器  
-            FileOpenPicker openPicker = new FileOpenPicker();
-            //初始位置  
-            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            //添加文件类型  
-            openPicker.FileTypeFilter.Add(".jpg");
-            openPicker.FileTypeFilter.Add(".jpeg");
-            openPicker.FileTypeFilter.Add(".png");
-            openPicker.FileTypeFilter.Add(".gif");
-            //选取单个文件  
-            Windows.Storage.StorageFile file = await openPicker.PickSingleFileAsync();
 
 
 
-
-            if (file != null)
-            {
-                using (IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.Read))
-                {
-                    var srcImage = new BitmapImage();
-                    await srcImage.SetSourceAsync(stream);
-                    Img.Source = srcImage;
-                }
-            }
-
-        }
-
-
-        private void Button_Click_Draw(object sender, RoutedEventArgs e)
+        /*private void Button_Click_Draw(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(draw));
         }
-
+        */
         private async void CutPicture(StorageFile file)
         {
 
@@ -120,111 +91,12 @@ namespace project
         }
 
 
-        public async void Save_Click(object sender, RoutedEventArgs e)
-        {
-            var saveFile = new FileSavePicker();
-            //初始位置  
-            saveFile.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            // 显示在下拉列表的文件类型  
-            saveFile.FileTypeChoices.Add("图片", new List<string>() { ".png", ".jpg", ".jpeg", ".bmp" });
-            // 默认的文件名  
-            saveFile.SuggestedFileName = "SaveFile";
 
-            StorageFile sFile = await saveFile.PickSaveFileAsync();
-
-            if (sFile != null)
-            {
-                // 在用户完成更改并调用CompleteUpdatesAsync之前，阻止对文件的更新  
-                CachedFileManager.DeferUpdates(sFile);
-                //把控件变成图像  
-                RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap();
-                //传入参数Image控件  
-                await renderTargetBitmap.RenderAsync(Img);
-
-                var pixelBuffer = await renderTargetBitmap.GetPixelsAsync();
-
-                using (var fileStream = await sFile.OpenAsync(FileAccessMode.ReadWrite))
-                {
-                    var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, fileStream);
-                    encoder.SetPixelData(
-                        BitmapPixelFormat.Bgra8,
-                        BitmapAlphaMode.Ignore,
-                        (uint)renderTargetBitmap.PixelWidth,
-                        (uint)renderTargetBitmap.PixelHeight,
-                        DisplayInformation.GetForCurrentView().LogicalDpi,
-                        DisplayInformation.GetForCurrentView().LogicalDpi,
-                        pixelBuffer.ToArray()
-                        );
-                    //刷新图像  
-                    await encoder.FlushAsync();
-                }
-            }
-        }
-
-
-        private async void Launch_Camera(object sender, RoutedEventArgs e)
-        {
-            CameraCaptureUI captureUI = new CameraCaptureUI();
-            captureUI.PhotoSettings.Format = CameraCaptureUIPhotoFormat.Jpeg;
-            captureUI.PhotoSettings.CroppedSizeInPixels = new Size(200, 200);
-
-            StorageFile photo = await captureUI.CaptureFileAsync(CameraCaptureUIMode.Photo);
-
-            if (photo == null)
-            {
-                // User cancelled photo capture
-                return;
-            }
-
-            IRandomAccessStream stream = await photo.OpenAsync(FileAccessMode.Read);
-            BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
-            SoftwareBitmap softwareBitmap = await decoder.GetSoftwareBitmapAsync();
-            SoftwareBitmap softwareBitmapBGR8 = SoftwareBitmap.Convert(softwareBitmap,
-            BitmapPixelFormat.Bgra8,
-            BitmapAlphaMode.Premultiplied);
-
-            SoftwareBitmapSource bitmapSource = new SoftwareBitmapSource();
-            await bitmapSource.SetBitmapAsync(softwareBitmapBGR8);
-
-            Img.Source = bitmapSource;
-        }
         private async void Button_Clicknew(object sender, RoutedEventArgs e)
         {
-            string desiredName = DateTime.Now.Ticks + ".jpg";
-            StorageFolder applicationFolder = ApplicationData.Current.LocalFolder;
-            StorageFolder folder = await applicationFolder.CreateFolderAsync("Pic", CreationCollisionOption.OpenIfExists);
-            StorageFile saveFile = await folder.CreateFileAsync(desiredName, CreationCollisionOption.OpenIfExists);
-            RenderTargetBitmap bitmap = new RenderTargetBitmap();
-            await bitmap.RenderAsync(Img);
-            var pixelBuffer = await bitmap.GetPixelsAsync();
-            using (var fileStream = await saveFile.OpenAsync(FileAccessMode.ReadWrite))
-            {
-                var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, fileStream);
-                encoder.SetPixelData(BitmapPixelFormat.Bgra8,
-                    BitmapAlphaMode.Ignore,
-                     (uint)bitmap.PixelWidth,
-                     (uint)bitmap.PixelHeight,
-                     DisplayInformation.GetForCurrentView().LogicalDpi,
-                     DisplayInformation.GetForCurrentView().LogicalDpi,
-                     pixelBuffer.ToArray());
-                await encoder.FlushAsync();
-            }
-
-            if (saveFile != null)
-            {
-                BlankPage1 editor = new BlankPage1();
-                editor.Show(saveFile);
-
-                editor.ImageEditedCompleted += (image_edited) =>
-                {
-                    Img.Source = image_edited;
-                };
-            }
+            
         }
-        private void Button_delete(object sender, RoutedEventArgs e)
-        {
-            MyFrame.Navigate(typeof(Page1));
-        }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -392,40 +264,188 @@ namespace project
                         }
                         else
                         {
-                            string desiredName = DateTime.Now.Ticks + ".jpg";
-                            StorageFolder applicationFolder = ApplicationData.Current.LocalFolder;
-                            StorageFolder folder = await applicationFolder.CreateFolderAsync("Pic", CreationCollisionOption.OpenIfExists);
-                            StorageFile saveFile = await folder.CreateFileAsync(desiredName, CreationCollisionOption.OpenIfExists);
-                            RenderTargetBitmap bitmap = new RenderTargetBitmap();
-                            await bitmap.RenderAsync(Img);
-                            var pixelBuffer = await bitmap.GetPixelsAsync();
-                            using (var fileStream = await saveFile.OpenAsync(FileAccessMode.ReadWrite))
+                            if(open.IsSelected)
                             {
-                                var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, fileStream);
-                                encoder.SetPixelData(BitmapPixelFormat.Bgra8,
-                                    BitmapAlphaMode.Ignore,
-                                     (uint)bitmap.PixelWidth,
-                                     (uint)bitmap.PixelHeight,
-                                     DisplayInformation.GetForCurrentView().LogicalDpi,
-                                     DisplayInformation.GetForCurrentView().LogicalDpi,
-                                     pixelBuffer.ToArray());
-                                await encoder.FlushAsync();
-                            }
+                                //文件选择器  
+                                FileOpenPicker openPicker = new FileOpenPicker();
+                                //初始位置  
+                                openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+                                //添加文件类型  
+                                openPicker.FileTypeFilter.Add(".jpg");
+                                openPicker.FileTypeFilter.Add(".jpeg");
+                                openPicker.FileTypeFilter.Add(".png");
+                                openPicker.FileTypeFilter.Add(".gif");
+                                //选取单个文件  
+                                Windows.Storage.StorageFile file = await openPicker.PickSingleFileAsync();
 
 
 
-                            if (saveFile != null)
-                            {
-                                paster editor = new paster();
-                                editor.Show(saveFile);
 
-                                editor.ImageEditedCompleted += (image_edited) =>
+                                if (file != null)
                                 {
-                                    Img.Source = image_edited;
-                                };
-
+                                    using (IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.Read))
+                                    {
+                                        var srcImage = new BitmapImage();
+                                        await srcImage.SetSourceAsync(stream);
+                                        Img.Source = srcImage;
+                                    }
+                                }
                             }
+                            else
+                            {
+                                if(regenerate.IsSelected)
+                                {
+                                    MyFrame.Navigate(typeof(Page1));
+                                }
+                                else
+                                {
+                                    if(Camera.IsSelected)
+                                    {
+                                        CameraCaptureUI captureUI = new CameraCaptureUI();
+                                        captureUI.PhotoSettings.Format = CameraCaptureUIPhotoFormat.Jpeg;
+                                        captureUI.PhotoSettings.CroppedSizeInPixels = new Size(200, 200);
 
+                                        StorageFile photo = await captureUI.CaptureFileAsync(CameraCaptureUIMode.Photo);
+
+                                        if (photo == null)
+                                        {
+                                            // User cancelled photo capture
+                                            return;
+                                        }
+
+                                        IRandomAccessStream stream = await photo.OpenAsync(FileAccessMode.Read);
+                                        BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
+                                        SoftwareBitmap softwareBitmap = await decoder.GetSoftwareBitmapAsync();
+                                        SoftwareBitmap softwareBitmapBGR8 = SoftwareBitmap.Convert(softwareBitmap,
+                                        BitmapPixelFormat.Bgra8,
+                                        BitmapAlphaMode.Premultiplied);
+
+                                        SoftwareBitmapSource bitmapSource = new SoftwareBitmapSource();
+                                        await bitmapSource.SetBitmapAsync(softwareBitmapBGR8);
+
+                                        Img.Source = bitmapSource;
+                                    }
+                                    else
+                                    {
+                                        if(save.IsSelected)
+                                        {
+
+                                            FileSavePicker savefile = new FileSavePicker();
+                                            //初始位置  
+                                            savefile.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+                                            // 显示在下拉列表的文件类型  
+                                            savefile.FileTypeChoices.Add("图片", new List<string>() { ".png", ".jpg", ".jpeg", ".bmp" });
+                                            // 默认的文件名  
+                                            savefile.SuggestedFileName = "SaveFile";
+
+                                            StorageFile sFile = await savefile.PickSaveFileAsync();
+
+                                            if (sFile != null)
+                                            {
+                                                // 在用户完成更改并调用CompleteUpdatesAsync之前，阻止对文件的更新  
+                                                CachedFileManager.DeferUpdates(sFile);
+                                                //把控件变成图像  
+                                                RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap();
+                                                //传入参数Image控件  
+                                                await renderTargetBitmap.RenderAsync(Img);
+
+                                                IBuffer pixelbuffer = await renderTargetBitmap.GetPixelsAsync();
+
+                                                using (var fileStream = await sFile.OpenAsync(FileAccessMode.ReadWrite))
+                                                {
+                                                    var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, fileStream);
+                                                    encoder.SetPixelData(
+                                                        BitmapPixelFormat.Bgra8,
+                                                        BitmapAlphaMode.Ignore,
+                                                        (uint)renderTargetBitmap.PixelWidth,
+                                                        (uint)renderTargetBitmap.PixelHeight,
+                                                        DisplayInformation.GetForCurrentView().LogicalDpi,
+                                                        DisplayInformation.GetForCurrentView().LogicalDpi,
+                                                        pixelbuffer.ToArray()
+                                                        );
+                                                    //刷新图像  
+                                                    await encoder.FlushAsync();
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (Sharpen.IsSelected)
+                                            {
+                                                string desiredName = DateTime.Now.Ticks + ".jpg";
+                                                StorageFolder applicationFolder = ApplicationData.Current.LocalFolder;
+                                                StorageFolder folder = await applicationFolder.CreateFolderAsync("Pic", CreationCollisionOption.OpenIfExists);
+                                                StorageFile saveFile = await folder.CreateFileAsync(desiredName, CreationCollisionOption.OpenIfExists);
+                                                RenderTargetBitmap bitmap = new RenderTargetBitmap();
+                                                await bitmap.RenderAsync(Img);
+                                                var pixelBuffer = await bitmap.GetPixelsAsync();
+                                                using (var fileStream = await saveFile.OpenAsync(FileAccessMode.ReadWrite))
+                                                {
+                                                    var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, fileStream);
+                                                    encoder.SetPixelData(BitmapPixelFormat.Bgra8,
+                                                        BitmapAlphaMode.Ignore,
+                                                         (uint)bitmap.PixelWidth,
+                                                         (uint)bitmap.PixelHeight,
+                                                         DisplayInformation.GetForCurrentView().LogicalDpi,
+                                                         DisplayInformation.GetForCurrentView().LogicalDpi,
+                                                         pixelBuffer.ToArray());
+                                                    await encoder.FlushAsync();
+                                                }
+
+                                                if (saveFile != null)
+                                                {
+                                                    BlankPage1 editor = new BlankPage1();
+                                                    editor.Show(saveFile);
+
+                                                    editor.ImageEditedCompleted += (image_edited) =>
+                                                    {
+                                                        Img.Source = image_edited;
+                                                    };
+                                                }
+                                            }
+                                            else
+                                            {
+                                                string desiredName = DateTime.Now.Ticks + ".jpg";
+                                                StorageFolder applicationFolder = ApplicationData.Current.LocalFolder;
+                                                StorageFolder folder = await applicationFolder.CreateFolderAsync("Pic", CreationCollisionOption.OpenIfExists);
+                                                StorageFile saveFile = await folder.CreateFileAsync(desiredName, CreationCollisionOption.OpenIfExists);
+                                                RenderTargetBitmap bitmap = new RenderTargetBitmap();
+                                                await bitmap.RenderAsync(Img);
+                                                var pixelBuffer = await bitmap.GetPixelsAsync();
+                                                using (var fileStream = await saveFile.OpenAsync(FileAccessMode.ReadWrite))
+                                                {
+                                                    var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, fileStream);
+                                                    encoder.SetPixelData(BitmapPixelFormat.Bgra8,
+                                                        BitmapAlphaMode.Ignore,
+                                                         (uint)bitmap.PixelWidth,
+                                                         (uint)bitmap.PixelHeight,
+                                                         DisplayInformation.GetForCurrentView().LogicalDpi,
+                                                         DisplayInformation.GetForCurrentView().LogicalDpi,
+                                                         pixelBuffer.ToArray());
+                                                    await encoder.FlushAsync();
+                                                }
+
+
+
+                                                if (saveFile != null)
+                                                {
+                                                    paster editor = new paster();
+                                                    editor.Show(saveFile);
+
+                                                    editor.ImageEditedCompleted += (image_edited) =>
+                                                    {
+                                                        Img.Source = image_edited;
+                                                    };
+
+                                                }
+                                            }
+                                            
+                                        }
+                                       
+                                    }
+                                }
+                            }
+                            
                         }
                     }
 

@@ -30,27 +30,34 @@
                     Name="TB" 
                    Text="Scenery" FontSize="48" HorizontalAlignment="Center" ></TextBlock>
         <Image Name="Img" Grid.Row="1" Grid.ColumnSpan="2"
-               Width="800" Height="600" VerticalAlignment="Top"  HorizontalAlignment="Left"  Margin="200,20,0,00"></Image>
+               Width="800" Height="600" VerticalAlignment="Top"  HorizontalAlignment="Left" Source="/Assets/sd.jpg" Margin="200,20,0,00"></Image>
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <Button FontFamily="Segoe MDL2 Assets"  Content="&#xE8C6;" Background="Pink" Opacity="0.5" FontSize="36"
-                    Height="75"  HorizontalAlignment="Right"   VerticalAlignment="Top" Width="100"
-                    Click="Scenery_Click1"/>
+            <Button  FontFamily="Segoe MDL2 Assets"  Content="&#xE8E5;" Background="Pink" Opacity="0.5" FontSize="36"
+                    Height="60"  HorizontalAlignment="Right"   VerticalAlignment="Top" Width="100"
+                    Click="Open_Click"/>
             <Button   FontFamily="Segoe MDL2 Assets"  Content="&#xE929;" Background="Pink" Opacity="0.5" FontSize="36"
-                    Height="75"  HorizontalAlignment="Right"   VerticalAlignment="Top" Width="100"
-                    Click="Scenery_Click3"/>
-            <Button  FontFamily="Segoe MDL2 Assets" Content="&#xE7FA;" Background="Pink" Opacity="0.5" FontSize="36"
-                    Height="75"  HorizontalAlignment="Right"   VerticalAlignment="Top" Width="100"
-                    Click="Scenery_Click4"/>
-            <Button FontFamily="Segoe MDL2 Assets" Content="&#xE8E5;"
+                    Height="60"  HorizontalAlignment="Right"   VerticalAlignment="Top" Width="100"
+                    Click="Button_Click_scrawl"/>
+            <Button  FontFamily="Segoe MDL2 Assets" Content="&#xE7FA;" Background="Pink" Opacity="0.5"  FontSize="36"
+                    Height="60"  HorizontalAlignment="Right"   VerticalAlignment="Top" Width="100"
+                    Click="Button_Click_afilter"/>
+            <Button FontFamily="Segoe MDL2 Assets" Content="&#xE8C6;"
                     Background="Pink" Opacity="0.5" FontSize="36"
-                    HorizontalAlignment="Right"  Height="75"   VerticalAlignment="Top" Width="100" Click="Scenery_Click5"/>
+                    HorizontalAlignment="Right"  Height="60"   VerticalAlignment="Top" Width="100" 
+                    Click="Cut_Click"/>
             <Button FontFamily="Segoe MDL2 Assets"
-                    Background="Pink" Opacity="0.5"
-                    Content="&#xE722;"  FontSize="36"  Height="75" HorizontalAlignment="Right"    VerticalAlignment="Top" Width="100" Click="Scenery_Click6"/>
-            <Button FontFamily="Segoe MDL2 Assets" Content="&#xE72C;" Background="Pink" Opacity="0.5"
-                    FontSize="36" HorizontalAlignment="Right"  Height="75" VerticalAlignment="Top" Width="100"  Click="Scenery_Click7"/>
-            <Button FontFamily="Segoe MDL2 Assets" Content="&#xE74E;" Background="Pink" Opacity="0.5" FontSize="36"
-                    HorizontalAlignment="right" Height="75" VerticalAlignment="Top" Width="100"   Click="Scenery_Click8"/>
+                    Background="Pink"  Opacity="0.5"
+                    Content="&#xE722;"  FontSize="36"  Height="60" HorizontalAlignment="Right"    VerticalAlignment="Top" Width="100" 
+                    Click="Launch_Camera"/>
+            <Button FontFamily="Segoe MDL2 Assets" Content="&#xEA37;" Background="Pink" Opacity="0.5"
+                    FontSize="36" HorizontalAlignment="Right"  Height="60" VerticalAlignment="Top" Width="100"  
+                    Click="Button_Clicknew"/>
+            <Button FontFamily="Segoe MDL2 Assets" Content="&#xEDA8;" Background="Pink"  Opacity="0.5" FontSize="36"
+                    HorizontalAlignment="right" Height="60" VerticalAlignment="Top" Width="100" Click="mohu_Click"   />
+            <Button FontFamily="Segoe MDL2 Assets" Content="&#xF1AD;" Background="Pink"  Opacity="0.5" FontSize="36"
+                    HorizontalAlignment="right" Height="60" VerticalAlignment="Top" Width="100" Click="Paster_Click" />
+            <Button FontFamily="Segoe MDL2 Assets" Content="&#xE74E;" Background="Pink"  Opacity="0.5" FontSize="36"
+                    HorizontalAlignment="right" Height="60" VerticalAlignment="Top" Width="100" Click="Save_Click" />
         </StackPanel>
 
         <Frame Name="MyFrame">

@@ -115,6 +115,9 @@
     <Compile Include="New\BlankPage2.xaml.cs">
       <DependentUpon>BlankPage2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="New\light.xaml.cs">
+      <DependentUpon>light.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
     </Compile>
@@ -145,6 +148,9 @@
     <Content Include="Assets\05.png" />
     <Content Include="Assets\2.15.png" />
     <Content Include="Assets\fa.jpg" />
+    <Content Include="Assets\food.jpg" />
+    <Content Include="Assets\rw.jpg" />
+    <Content Include="Assets\sd.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -180,6 +186,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="New\BlankPage2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="New\light.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

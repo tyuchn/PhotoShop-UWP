@@ -91,7 +91,7 @@
                                     <ListBoxItem Name="Sharpen" >
                                         <StackPanel Orientation="Horizontal">
                                             <SymbolIcon Symbol="AlignLeft" Foreground="Gray"/>
-                                            <TextBlock  Text="Ruihua" Margin="24,0"/>
+                                            <TextBlock  Text="Sharpen" Margin="24,0"/>
                                         </StackPanel>
                                     </ListBoxItem>
                                     <ListBoxItem Name="save">

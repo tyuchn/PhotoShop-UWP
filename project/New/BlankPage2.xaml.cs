@@ -73,19 +73,12 @@ namespace project.New
 
             border.Background = new SolidColorBrush(Color.FromArgb(0XAA, 0X00, 0X00, 0X00));
 
-            if (UWPPlatformTool.IsMobile)
-            {
-                border.Width = this.Width = width;
-                border.Height = this.Height = height;
-            }
-            else
-            {
                 border.Width = width;
                 border.Height = height;
 
                 this.Height = height * 0.8;
                 this.Width = this.Height * 1.6;
-            }
+            
 
             SetCanvas();
 
@@ -128,19 +121,12 @@ namespace project.New
             var height = ApplicationView.GetForCurrentView().VisibleBounds.Height;
             var width = ApplicationView.GetForCurrentView().VisibleBounds.Width;
 
-            if (UWPPlatformTool.IsMobile)
-            {
-                border.Width = this.Width = width;
-                border.Height = this.Height = height;
-            }
-            else
-            {
                 border.Width = width;
                 border.Height = height;
 
                 this.Height = height * 0.8;
                 this.Width = this.Height * 1.6;
-            }
+          
             SetCanvas();
             MyCanvas.Invalidate();
             await Task.Delay(10);
@@ -225,8 +211,8 @@ namespace project.New
 
         #region fields
         private Color _back_color = Colors.White;   //画布背景色
-        private Stretch _stretch = Stretch.Uniform;  //底图图片填充方式
-        private int _size_mode = 2;  //画布长宽比  
+        private Stretch _stretch = Stretch.Fill;  //底图图片填充方式
+        private int _size_mode = 1;  //画布长宽比  
         private Color _pen_color = Colors.Orange;  //涂鸦画笔颜色
         private CanvasBitmap _image;  //底图
         private int _filter_index = 0;  //滤镜

@@ -57,6 +57,10 @@ namespace project
                         NavView.Header = "Food";
                         Frame.Navigate(typeof(food));
                         break;
+                    case "DrawItem":
+                        NavView.Header = "Draw";
+                        Frame.Navigate(typeof(draw));
+                        break;
 
                 }
             }

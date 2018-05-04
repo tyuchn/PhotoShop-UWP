@@ -168,8 +168,8 @@ namespace project
 
 
         private Color _back_color = Colors.White;   //画布背景色
-        private Stretch _stretch = Stretch.Uniform;  //底图图片填充方式
-        private int _size_mode = 2;  //画布长宽比  
+        private Stretch _stretch = Stretch.Fill;  //底图图片填充方式
+        private int _size_mode = 1;  //画布长宽比  
         private int _pen_size = 2;   //涂鸦画笔粗细
         private Color _pen_color = Colors.Orange;  //涂鸦画笔颜色
         private DoodleUI _current_editing_doodleUI;  //当前涂鸦对象

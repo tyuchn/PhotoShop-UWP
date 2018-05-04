@@ -158,8 +158,8 @@ public sealed partial class light : Page, INotifyPropertyChanged
         GenerateResultImage();
     }
     private Color _back_color = Colors.White;   //画布背景色
-    private Stretch _stretch = Stretch.Uniform;  //底图图片填充方式
-    private int _size_mode = 2;  //画布长宽比  
+    private Stretch _stretch = Stretch.Fill;  //底图图片填充方式
+    private int _size_mode = 1;  //画布长宽比  
     private CanvasBitmap _image;  //底图
     private CanvasRenderTarget GetDrawings(bool edit)
     {

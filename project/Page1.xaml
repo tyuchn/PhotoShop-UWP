@@ -40,27 +40,57 @@
                 <Button Style="{StaticResource ButtonStyle}" 
                         Content="Open"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="500,650,0,0" VerticalAlignment="Top" Width="200" Click="Open_Click"/>
 
-                <Button  Style="{StaticResource ButtonStyle}" FontFamily="Segoe MDL2 Assets" Content="&#xE72C;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="700,650,0,0" VerticalAlignment="Top" Width="200" Click="Button_delete"/>
+                <Button Style="{StaticResource ButtonStyle}" FontFamily="Segoe MDL2 Assets" Content="&#xE72C;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="700,650,0,0" VerticalAlignment="Top" Width="200" Click="Button_delete"/>
                 <Button Style="{StaticResource ButtonStyle}" FontFamily="Segoe MDL2 Assets" Content="&#xE74E;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="900,650,0,0" VerticalAlignment="Top" Width="200" Click="Save_Click"/>
-                <Button  Background="Gray"
-                         Content="Cut" Opacity="0.5"  FontSize="24" HorizontalAlignment="Left" Height="75" Margin="50,150,0,0" VerticalAlignment="Top" Width="150" Click="Cut_Click"/>
-                <Button   Background="Gray"
-                          Content="Draw"  Opacity="0.5" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="200,150,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_Draw"/>
-                <Button Background="Gray"
-                        Content="Scrawl"   Opacity="0.5" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="50,225,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_scrawl"/>
-                <Button  Background="Gray"
-                         Content="AddFilter"  Opacity="0.5" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="200,225,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_afilter"/>
-                <Button  Background="Gray" Content="Blur"  Opacity="0.5"
-                        FontSize="24" HorizontalAlignment="Left" Height="75" Margin="50,300,0,0" VerticalAlignment="Top" Width="150" Click="mohu_Click"/>
-                <Button Background="Gray" Content="Paster"   Opacity="0.5" FontSize="24" HorizontalAlignment="Left" Height="75" Margin="200,300,0,0" VerticalAlignment="Top" Width="150" Click="Paster_Click"/>
                 <Button   Background="Gray" FontFamily="Segoe MDL2 Assets" Content="&#xEA37;" Opacity="0.5"
                     FontSize="36" HorizontalAlignment="left"  Height="75" Margin="200,375,0,0" VerticalAlignment="Top" Width="150"  
                     Click="Button_Clicknew"/>
                 <Button  Background="Gray"
                          FontFamily="Segoe MDL2 Assets" Opacity="0.5"  Content="&#xE722;"  FontSize="36" HorizontalAlignment="Left" Height="75" Margin="50,375,0,0" VerticalAlignment="Top" Width="150" Click="Launch_Camera"/>
-
+                <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click"/>
                 <Frame Name="MyFrame">
-
+                    <SplitView Name="MySplit" HorizontalAlignment="Left" Height="693" Margin="1281,91,0,0" VerticalAlignment="Top" Width="219">
+                        <SplitView.Pane>
+                            <StackPanel Orientation="Vertical">
+                                <ListBox Name="Options" SelectionChanged="Options_changed" SelectionMode="Single">
+                                    <ListBoxItem Name="Cut">
+                                        <StackPanel Orientation="Horizontal">
+                                            <SymbolIcon Symbol="Add" Foreground="Gray"/>
+                                            <TextBlock  Text="Cut" Margin="24,0"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+                                    <ListBoxItem Name="scrawl">
+                                        <StackPanel Orientation="Horizontal">
+                                            <SymbolIcon Symbol="Add" Foreground="Gray"/>
+                                            <TextBlock  Text="Scrawl" Margin="24,0"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+                                    <ListBoxItem Name="blur">
+                                        <StackPanel Orientation="Horizontal">
+                                            <SymbolIcon Symbol="Add" Foreground="Gray"/>
+                                            <TextBlock  Text="Blur" Margin="24,0"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+                                    <ListBoxItem Name="addfilter">
+                                        <StackPanel Orientation="Horizontal">
+                                            <SymbolIcon Symbol="Add" Foreground="Gray"/>
+                                            <TextBlock  Text="AddFilter" Margin="24,0"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+                                    <ListBoxItem Name="paster">
+                                        <StackPanel Orientation="Horizontal">
+                                            <SymbolIcon Symbol="Add" Foreground="Gray"/>
+                                            <TextBlock  Text="Paster" Margin="24,0"/>
+                                        </StackPanel>
+                                    </ListBoxItem>
+                                </ListBox>
+                            <Grid/>
+                            </StackPanel>
+                        </SplitView.Pane>
+                        <Grid>
+                           
+                        </Grid>
+                    </SplitView>
                 </Frame>
 
             </Grid>
